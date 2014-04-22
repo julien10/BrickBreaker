@@ -21,7 +21,6 @@ public class Fenetre extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setContentPane(pan);
-		this.setVisible(true);
 		Icon playimg = new ImageIcon("play.png");
 		play.setIcon(playimg);
 		play.setLayout(null);
@@ -30,10 +29,11 @@ public class Fenetre extends JFrame implements ActionListener {
 		this.add(play);
 		play.setBounds(200, 570, 150, 82);
 		play.addActionListener(this);
+		this.setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent arg) {
 		this.setBackground(Color.black);
-		System.out.println("Yo");
+		//System.out.println("Yo");
 	}
 }
