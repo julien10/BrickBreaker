@@ -26,4 +26,5 @@ public class Raquette extends GameObject {
 		this.lives=lives;
 	}
 
+
 }

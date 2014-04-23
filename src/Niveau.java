@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 
@@ -24,7 +26,8 @@ public class Niveau {
 			 briques.add(new Brick(50,1,0,b*(i+1)-20*i,70,0,0,0));
 		 }
 		 // float length,int lives,int posX,int posY,float speedX,float speedY,int bonus
-		 raquette = new Raquette(100, 3, 475, 600, 10, 0, 0);
+		 raquette = new Raquette(100, 3, 475, 600, 0, 0, 0);
 	 }
+	 
 
 }
