@@ -6,15 +6,27 @@ public abstract class GameObject {
 	private float posY;
 	private float speedX;
 	private float speedY;
+	private int hauteur;
+	protected int longueur;
 	private int bonus;
 	private Color couleur;
 	
-	public GameObject(float posX, float posY, float speedX,float speedY,int bonus){
+	public GameObject(int longueur, int hauteur, float posX, float posY, float speedX, float speedY, int bonus){
+		this.longueur = longueur;
+		this.hauteur = hauteur;
 		this.posX = posX;	
 		this.posY = posY;
 		this.speedX = speedX;
 		this.speedY = speedY;
 		this.bonus = bonus;
+	}
+	
+	public int getHauteur() {
+		return this.hauteur;
+	}
+	
+	public int getLongueur() {
+		return this.longueur;
 	}
 	
 	public void setCouleur(Color c) {
@@ -40,7 +52,7 @@ public abstract class GameObject {
 		this.posX = posX;
 	}
 	public void setPosY(float posY){
-		this.posX = posY;
+		this.posY = posY;
 	}
 	public void setSpeedX(float speedX){
 		this.speedX = speedX;
@@ -51,13 +63,5 @@ public abstract class GameObject {
 	public void setbonus(Integer bonus){
 		this.bonus = bonus;
 	}
-	
-	public float deltaX(float t, float speedX){
-		return t*speedX;
-	}
-	public float deltaY(float t, float speedY){
-		return t*speedY;
-	}
-
-	
+		
 }

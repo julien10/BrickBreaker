@@ -5,14 +5,13 @@ public class Brick extends GameObject {
 	private float points;
 	private int resistance;
 	
-	public Brick(float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus){
-		super(posX,posY,speedX,speedY,bonus);
+	public Brick(int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus){
+		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
 		this.points = points;
 		this.resistance = resistance;
 		this.throwedBonus = throwedBonus;
 	}	
-		
-		
+	
 	public float getPoints(){
 		return this.points;
 	}

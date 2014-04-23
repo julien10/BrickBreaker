@@ -2,8 +2,8 @@
 public class Ball extends GameObject {
 	private float radius;
 	
-	public Ball(float radius,float posX,float posY,float speedX,float speedY,int bonus){
-		super(posX,posY,speedX,speedY,bonus);
+	public Ball(int longueur, int hauteur, float radius,float posX,float posY,float speedX,float speedY,int bonus){
+		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
 		this.radius = radius;
 	}
 	

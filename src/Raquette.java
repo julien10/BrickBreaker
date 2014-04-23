@@ -1,25 +1,19 @@
 
 public class Raquette extends GameObject {
-	private float length;
 	private int lives;
 
 
-	public Raquette(float length,int lives,int posX,int posY,float speedX,float speedY,int bonus){
-		super(posX,posY,speedX,speedY,bonus);
+	public Raquette(int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY,int bonus){
+		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
 		this.lives=lives;
-		this.length=length;
-	}
-	
-	public float getLength(){
-		return this.length;
 	}
 
 	public int getLives(){
 		return this.lives;
 	}
 	
-	public void setLength(float length){
-		this.length=length;
+	public void setLongueur(int longueur){
+		this.longueur=longueur;
 	}
 
 	public void setLives(int lives){
