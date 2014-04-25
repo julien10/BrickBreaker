@@ -1,18 +1,27 @@
 
 public class Ball extends GameObject {
-	private float radius;
+
 	
-	public Ball(int longueur, int hauteur, float radius,float posX,float posY,float speedX,float speedY,int bonus){
+	public Ball(int longueur, int hauteur,float posX,float posY,float speedX,float speedY,int bonus){
 		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
-		this.radius = radius;
 	}
 	
-	public float getRadius(){
-		return this.radius;
+
+	
+	public float speedTotal(){
+		float speedtotal=(float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
+		return speedtotal;
+		
 	}
 	
-	public void setRadius(float radius){
-		this.radius=radius;
+	
+	public boolean ballout(float posy){
+		boolean ballOut = false;
+		if ( getPosY() >= posy+15){
+			ballOut = true;
+		}
+		
+		return ballOut;
 	}
 	
 

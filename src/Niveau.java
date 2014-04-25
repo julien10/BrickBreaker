@@ -1,45 +1,45 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.Timer;
 
 
 public class Niveau {
-	 public List<GameObject> briques;
+	 public List<Brick> briques;
 	 public List<GameObject> objets;
+	 public ArrayList<Bonus> bonus;
+	 public ArrayList<Ball> balls;
 	 public Raquette raquette;
 	 public Ball ball;
 	 public int dt = 3;
 	 
 	 public Niveau() {
-		 briques = new ArrayList<GameObject>();
+		 briques = new ArrayList<Brick>();
 		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
+		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
 		 int a = 40;
 		 for (int i=0; i<25; i++) {
-			 briques.add(new Brick(40,20,50,1,0,a*(i+1),50,0,0,0));
+			 briques.add(new BrickNormal(40,20,a*(i+1),50,0,0,0));
 		 }
 		 int b = 60;
 		 for (int i=0; i<24; i++) {
-			 briques.add(new Brick(40,20,50,1,0,b*(i+1)-20*i,70,0,0,0));
+			 briques.add(new BrickBonusMB(40,20,b*(i+1)-20*i,70,0,0,0));
 		 }
 		 
 		 // int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY,int bonus
-		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0, 0);
+		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0, 0);
 		 
 		 
 		 // int longueur, int hauteur, float radius,float posX,float posY,float speedX,float speedY,int bonus
-		 ball = new Ball(0,0,15, 550, 350, 1, -2, 0);
-		 objets = new ArrayList<GameObject>();
-		 objets.add(raquette);
-		 for (GameObject e : briques) {
-			 objets.add(e);
-		 }
+//		 ball = new Ball(0,0,15, 550, 350, 1, -2, 0);
+		 
+		 balls = new ArrayList<Ball>();
+		 balls.add(new Ball(12,12, 485, 350, 2, -1, 0));
+		 bonus = new ArrayList<Bonus>();
+		 briques.add(raquette);
+//		 objets = new ArrayList<GameObject>();
+//		 objets.add(raquette);
+//		 for (GameObject e : briques) {
+//			 objets.add(e);
+//		 }
 	 }
 	
 	 public float newPosX(GameObject a) {
@@ -56,7 +56,6 @@ public class Niveau {
 			 if (newPosX < 0 || newPosX > 1090) {
 				 float tmp = a.getSpeedX();
 				 a.setSpeedX(-tmp);
-				 System.out.println(a.getClass());
 			 }
 		 }
 		 return newPosX;
@@ -74,5 +73,48 @@ public class Niveau {
 		 return newPosY;
 	 }
 
+
+	 public void brickDelete(Brick Br){
+		 briques.remove(Br);
+	 }
+	 
+	 public void bonusDelete(GameObject b){
+		 bonus.remove(b);
+	 }
+	 public void bonusAdd(Bonus Br){
+		 bonus.add(Br);
+	 }
+	 
+	 public void  ListBonusRefresh(Brick br){
+		 ArrayList<Bonus> bonusToLow = new ArrayList<Bonus>();
+		 for(Bonus bn : bonus){
+			 if (bn.BonusLow(br.getPosY(), br.getHauteur())){
+				 bonusToLow.add(bn);
+			 }
+		 }
+		 if(bonusToLow.size()>0){
+			 for(Bonus bn : bonusToLow){
+				 bonus.remove(bn);
+			 }
+		 }
+	 }
+	 
+	 public void RaquettePLusLife(){
+		 raquette.setLives(raquette.getLives()+1);
+	 }
+	 
+	 public void  ListBallsRefresh(Brick br){
+		 ArrayList<Ball> ballsToLow = new ArrayList<Ball>();
+		 for(Ball b : balls){
+			 if (b.ballout(br.getPosY())){
+				 ballsToLow.add(b);
+			 }
+		 }
+		 if(ballsToLow.size()>0){
+			 for(Ball b : ballsToLow){
+				 balls.remove(b);
+			 }
+		 }
+	 }
 	 
 }

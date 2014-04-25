@@ -21,6 +21,7 @@ public abstract class GameObject {
 		this.bonus = bonus;
 	}
 	
+	
 	public int getHauteur() {
 		return this.hauteur;
 	}

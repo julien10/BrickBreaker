@@ -1,39 +1,57 @@
 
-public class Brick extends GameObject {
+public abstract class Brick extends GameObject {
 	
-	private int throwedBonus;
-	private float points;
-	private int resistance;
+
 	
-	public Brick(int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus){
+	public Brick(int longueur, int hauteur,  float posX, float posY, float speedX, float speedY,int bonus){
 		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
-		this.points = points;
-		this.resistance = resistance;
-		this.throwedBonus = throwedBonus;
+
 	}	
 	
-	public float getPoints(){
-		return this.points;
+	
+	public boolean isBallInside(float x, float y, float radius){	
+		boolean inside = false;
+		if (y+radius >= getPosY() && y-radius<=getPosY()+getHauteur()){
+			if (x>=getPosX() && x<=getPosX()+getLongueur()){
+				inside = true;
+			}
+		}
+		if (x+radius>=getPosX() && x-radius<=getPosX()+getLongueur()){
+			if (y >= getPosY() && y<=getPosY()+getHauteur()){
+				inside = true;
+			}
+		}
+		return inside;
 	}
-		
-	public int getResistance(){
-		return this.resistance;
-	}	
 	
-	public int getThrowedBonus(){
-		return this.throwedBonus;
+	public boolean isRebondVertical(float x){
+		boolean rebondVertical = false;
+		if(x>= getPosX() && x <= getPosX()+getLongueur() ){
+			rebondVertical = true;
+		}
+		return rebondVertical;
+	}
+
+
+
+	public boolean isRebondHorizontal( float y){
+		boolean rebondHorizontal = false;
+		if(y>= getPosY() && y <= getPosY()+getHauteur() ){
+			rebondHorizontal = true;
+		}
+		return rebondHorizontal;
 	}
 	
-	public void setPoints(float points){
-		this.points=points;
-	}	
-	
-	public void setResistance(int resistance){
-		this.resistance=resistance;
-	}	
-	
-	public void setThrowedBonus(int throwedBonus){
-		this.throwedBonus=throwedBonus;
-	}	
+	public abstract  boolean reactionRebond(GameObject b,Niveau niveau);
+
+	public boolean isInsideObjectUpperSide(float posx, float posy,int  longueur){
+		boolean isInside = false;
+		if (getPosY()+getHauteur()>posy && getPosY()<posy){
+			if(posx<getPosX() && posx+longueur>getPosX()+getLongueur()){
+				isInside = true;
+			}
+		}
+		return isInside;
+	}
 			
 }
