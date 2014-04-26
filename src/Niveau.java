@@ -10,8 +10,11 @@ public class Niveau {
 	 public Raquette raquette;
 	 public Ball ball;
 	 public int dt = 3;
+	 public int score;
+	 public int vies;
 	 
 	 public Niveau() {
+		 score = 0;
 		 briques = new ArrayList<Brick>();
 		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
 		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
@@ -21,18 +24,19 @@ public class Niveau {
 		 }
 		 int b = 60;
 		 for (int i=0; i<24; i++) {
-			 briques.add(new BrickBonusMB(40,20,b*(i+1)-20*i,70,0,0,0));
+			 briques.add(new BrickNormal(40,20,b*(i+1)-20*i,70,0,0,0));
 		 }
 		 
 		 // int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY,int bonus
 		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0, 0);
-		 
+		 vies = raquette.getLives();
 		 
 		 // int longueur, int hauteur, float radius,float posX,float posY,float speedX,float speedY,int bonus
 //		 ball = new Ball(0,0,15, 550, 350, 1, -2, 0);
 		 
 		 balls = new ArrayList<Ball>();
 		 balls.add(new Ball(12,12, 485, 350, 2, -1, 0));
+		 balls.add(new Ball(12,12, 60, 20, 2, -1, 0));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
 //		 objets = new ArrayList<GameObject>();
@@ -53,7 +57,7 @@ public class Niveau {
 			 }
 		 }
 		 if (a instanceof Ball) {
-			 if (newPosX < 0 || newPosX > 1090) {
+			 if (newPosX < 0 || newPosX > 1088) {
 				 float tmp = a.getSpeedX();
 				 a.setSpeedX(-tmp);
 			 }

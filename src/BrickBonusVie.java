@@ -8,9 +8,10 @@ public class BrickBonusVie extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur()/2)){
+		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 			stop = true;
 			niveau.brickDelete(this);
+			niveau.score = niveau.score + 25;
 			niveau.bonusAdd(new BonusVie(10,10,getPosX()+getLongueur()/2-5,getPosY(),0,2,0));
 			if(isRebondVertical(b.getPosX())){
 				b.setSpeedY(-b.getSpeedY());

@@ -21,9 +21,10 @@ public class BrickResistance extends Brick {
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
 		if (getResistance() == 1) {
-			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur()/2)){
+			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 				stop = true;
 				niveau.brickDelete(this);
+				niveau.score = niveau.score + 50;
 				if(isRebondVertical(b.getPosX())){
 					b.setSpeedY(-b.getSpeedY());
 				}
@@ -33,9 +34,10 @@ public class BrickResistance extends Brick {
 			}
 		}
 		else {
-			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur()/2)){
+			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 				stop = true;
 				setResistance(getResistance()-1);
+				niveau.score = niveau.score + 50*(1 + getResistance());
 				if (isRebondVertical(b.getPosX())) {
 					b.setSpeedY(-b.getSpeedY());
 				}

@@ -8,9 +8,10 @@ public class BrickCloud extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur()/2)){
+		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 			stop = true;
 			niveau.brickDelete(this);
+			niveau.score = niveau.score + 50;
 		}
 		return stop;
 	}

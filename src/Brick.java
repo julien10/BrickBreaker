@@ -34,7 +34,7 @@ public abstract class Brick extends GameObject {
 
 
 
-	public boolean isRebondHorizontal( float y){
+	public boolean isRebondHorizontal(float y){
 		boolean rebondHorizontal = false;
 		if(y>= getPosY() && y <= getPosY()+getHauteur() ){
 			rebondHorizontal = true;

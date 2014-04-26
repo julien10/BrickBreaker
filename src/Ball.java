@@ -17,7 +17,7 @@ public class Ball extends GameObject {
 	
 	public boolean ballout(float posy){
 		boolean ballOut = false;
-		if ( getPosY() >= posy+15){
+		if (getPosY() >= posy+15){
 			ballOut = true;
 		}
 		

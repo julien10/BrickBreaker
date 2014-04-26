@@ -7,7 +7,7 @@ public abstract class Bonus extends Brick {
 	
 	public boolean BonusLow(float posy, int hauteur){
 		boolean toLow = false;
-		if(getPosY()>=posy+ hauteur-getHauteur() ){
+		if(getPosY() >= posy + hauteur - getHauteur()){
 			toLow = true;
 		}
 		return toLow;

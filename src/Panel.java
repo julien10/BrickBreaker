@@ -50,10 +50,12 @@ public class Panel extends JPanel {
 			}
 			
 			for(GameObject o : niveau.briques) {
-				int px = (int)(o.getPosX());
-				int py = (int)(o.getPosY());
-//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-				g.drawImage(brick1, px, py, null);
+				if (o.getLongueur() == 40) {
+					int px = (int)(o.getPosX());
+					int py = (int)(o.getPosY());
+//					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+					g.drawImage(brick1, px, py, null);
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -68,19 +70,13 @@ public class Panel extends JPanel {
 			int py = (int)(o.getPosY());
 			g.drawRect(px, py, o.getLongueur(), o.getHauteur());
 		}
+		g.setColor(Color.white);
 
 		if (niveau.raquette.getLives() > 0) {
 			int x = (int) niveau.raquette.getPosX();
 			int y = (int) niveau.raquette.getPosY();
 			g.fillRoundRect(x, y, niveau.raquette.getLongueur(), niveau.raquette.getHauteur(),15,15);
 		}
-		
-		
-		
-//		int x2 = (int) niveau.ball.getPosX();
-//		int y2 = (int) niveau.ball.getPosY();
-//		int radius = (int) niveau.ball.getRadius();
-//		g.fillOval(x2, y2, radius, radius);
 	}
 	
 	

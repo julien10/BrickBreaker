@@ -8,9 +8,10 @@ public class BrickAccelerate extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur()/2)){
+		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 			stop = true;
 			niveau.brickDelete(this);
+			niveau.score = niveau.score + 150;
 			if(isRebondVertical(b.getPosX())){
 				b.setSpeedY((float)-1.2*b.getSpeedY());
 				b.setSpeedX((float)1.2*b.getSpeedX());
