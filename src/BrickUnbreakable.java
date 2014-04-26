@@ -1,8 +1,8 @@
 
 public class BrickUnbreakable extends Brick {
 
-	public BrickUnbreakable(int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public BrickUnbreakable(int longueur, int hauteur,  int posX, int posY, float speedX, float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 	}
 	
 	

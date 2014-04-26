@@ -20,23 +20,21 @@ public class Niveau {
 		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
 		 int a = 40;
 		 for (int i=0; i<25; i++) {
-			 briques.add(new BrickNormal(40,20,a*(i+1),50,0,0,0));
+			 briques.add(new BrickUnbreakable(40,20,a*(i+1),50,0,0));
 		 }
 		 int b = 60;
 		 for (int i=0; i<24; i++) {
-			 briques.add(new BrickNormal(40,20,b*(i+1)-20*i,70,0,0,0));
+			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
 		 }
+		 for (int i=0; i<25; i++)
+			 briques.add(new BrickCloud(40,20,a*(i+1),90,0,0));
 		 
-		 // int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY,int bonus
-		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0, 0);
+		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
-		 // int longueur, int hauteur, float radius,float posX,float posY,float speedX,float speedY,int bonus
-//		 ball = new Ball(0,0,15, 550, 350, 1, -2, 0);
-		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(12,12, 485, 350, 2, -1, 0));
-		 balls.add(new Ball(12,12, 60, 20, 2, -1, 0));
+		 balls.add(new Ball(12,12, 485, 350, 2, -1));
+//		 balls.add(new Ball(12,12, 60, 20, 2, -1));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
 //		 objets = new ArrayList<GameObject>();
@@ -72,7 +70,12 @@ public class Niveau {
 			 a.setSpeedY(-tmp);
 		 }
 		 else if (newPosY > 700) {
-			 raquette.setLives(raquette.getLives()-1);
+			 if (balls.size() == 1) {
+				 raquette.setLives(raquette.getLives()-1);
+			 	 ListBallsRefresh(raquette);
+			 }
+			 else
+				 ListBallsRefresh(raquette);
 		 }
 		 return newPosY;
 	 }

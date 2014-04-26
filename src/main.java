@@ -1,3 +1,7 @@
+import java.io.IOException;
+
+import javax.swing.JFrame;
+
 
 public class main {
 
@@ -7,6 +11,13 @@ public class main {
 		new Window(niveau);
 //		new Fenetre();
 		
+//		JFrame a = new JFrame();
+//		try {
+//			a.setContentPane(new ChoixTheme());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }

@@ -35,11 +35,15 @@ public class Panel extends JPanel {
 		Image brick1;
 		Image brick2;
 		Image brick3;
+		Image bonus;
+		Image brick4;
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			brick1 = ImageIO.read(new File("briquerouge1.png"));
 			brick2 = ImageIO.read(new File("briquerouge2.png"));
 			brick3 = ImageIO.read(new File("briquerouge3.png"));
+			bonus = ImageIO.read(new File("bonus.png"));
+			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
 			
 			for(GameObject o : niveau.balls) {
 				int x2 = (int) o.getPosX();
@@ -54,9 +58,29 @@ public class Panel extends JPanel {
 					int px = (int)(o.getPosX());
 					int py = (int)(o.getPosY());
 //					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-					g.drawImage(brick1, px, py, null);
+					if (o instanceof BrickResistance) {
+						if (((BrickResistance) o).getResistance() == 1)
+							g.drawImage(brick1, px, py, null);
+						else if (((BrickResistance) o).getResistance() == 2)
+							g.drawImage(brick2, px, py, null);
+						else if (((BrickResistance) o).getResistance() == 3)
+							g.drawImage(brick3, px, py, null);
+					}
+					else if (o instanceof BrickUnbreakable)
+						g.drawImage(brick4,px,py,null);
+					else
+						g.drawImage(brick1, px, py, null);
 				}
 			}
+			
+
+			for(Brick o : niveau.bonus) {
+				int px = (int)(o.getPosX());
+				int py = (int)(o.getPosY());
+//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+				g.drawImage(bonus,px,py,null);
+			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,14 +89,10 @@ public class Panel extends JPanel {
 			return;
 		}
 
-		for(Brick o : niveau.bonus) {
-			int px = (int)(o.getPosX());
-			int py = (int)(o.getPosY());
-			g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-		}
 		g.setColor(Color.white);
+		
 
-		if (niveau.raquette.getLives() > 0) {
+		if (niveau.raquette.getLives() >= 0) {
 			int x = (int) niveau.raquette.getPosX();
 			int y = (int) niveau.raquette.getPosY();
 			g.fillRoundRect(x, y, niveau.raquette.getLongueur(), niveau.raquette.getHauteur(),15,15);

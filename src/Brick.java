@@ -3,8 +3,8 @@ public abstract class Brick extends GameObject {
 	
 
 	
-	public Brick(int longueur, int hauteur,  float posX, float posY, float speedX, float speedY,int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public Brick(int longueur, int hauteur,  float posX, float posY, float speedX, float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 
 	}	
 	

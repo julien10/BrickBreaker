@@ -3,8 +3,8 @@ public class Raquette extends Brick {
 	private int lives;
 
 	
-	public Raquette(int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY,int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public Raquette(int longueur, int hauteur,int lives,int posX,int posY,float speedX,float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 		this.lives=lives;
 	}
 
@@ -14,7 +14,7 @@ public class Raquette extends Brick {
 	
 
 	public void setLives(int lives){
-		if (lives > 0)
+		if (lives >= 0)
 			this.lives=lives;
 	}
 	
@@ -33,7 +33,7 @@ public class Raquette extends Brick {
 		return stop;
 	}
 	
-	public void lifeMinusNormal(Ball b, float posy){
+	public void lifeMinusNormal(Ball b, float posy, Niveau niveau){
 		if(b.ballout(posy)){
 			if(getLives() >= 1){
 				setLives(getLives()-1);
@@ -43,17 +43,14 @@ public class Raquette extends Brick {
 				b.setSpeedY(-1);
 			}
 			else{
-				b.setPosX(400);
-				b.setPosY(400);
-				b.setSpeedX(0);
-				b.setSpeedY(0);
+				niveau.balls.remove(b);
 			}
 		}
 	}
 	
 	public void lifeMinusFinal(Niveau niveau){
 		if(niveau.balls.size() == 1){
-			niveau.raquette.lifeMinusNormal(niveau.balls.get(0), niveau.raquette.getPosY());
+			niveau.raquette.lifeMinusNormal(niveau.balls.get(0), niveau.raquette.getPosY(), niveau);
 		}
 		else{
 			niveau.ListBallsRefresh(niveau.raquette);

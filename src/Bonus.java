@@ -1,8 +1,8 @@
 
 public abstract class Bonus extends Brick {
 
-	public Bonus(int longueur, int hauteur,  float posX, float posY, float speedX, float speedY,int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public Bonus(int longueur, int hauteur,  float posX, float posY, float speedX, float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 	}
 	
 	public boolean BonusLow(float posy, int hauteur){

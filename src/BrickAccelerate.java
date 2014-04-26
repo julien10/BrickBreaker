@@ -1,8 +1,8 @@
 
 public class BrickAccelerate extends Brick {
 
-	public BrickAccelerate(int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public BrickAccelerate(int longueur, int hauteur,  int posX, int posY, float speedX, float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 	}
 	
 	

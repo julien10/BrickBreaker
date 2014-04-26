@@ -1,21 +1,13 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 
@@ -53,9 +45,7 @@ public class Window extends JFrame {
 		infos.add(affichageScore);
 		infos.add(affichageVies);
 		panel.setOpaque(false);
-		container.setBackground(Color.yellow);
 		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-		//panel.setBackground(Color.black);
 		container.add(panel);
 		container.add(infos);
 		this.setContentPane(container);
@@ -92,6 +82,7 @@ public class Window extends JFrame {
 	        		checkRebond(b, niveau);
 
 	        	}
+	        	niveau.vies = niveau.raquette.getLives();
 	        	niveau.raquette.lifeMinusFinal(niveau);
 	    		affichageScore.setText("<html>Score<br>" + niveau.score + "</html>");
 	    		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");

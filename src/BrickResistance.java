@@ -3,8 +3,8 @@ public class BrickResistance extends Brick {
 	
 	public int resistance;
 	
-	public BrickResistance(int resistance,int longueur, int hauteur, int posX, int posY, float speedX, float speedY, int bonus){
-		super(longueur, hauteur, posX,posY,speedX,speedY,bonus);
+	public BrickResistance(int resistance,int longueur, int hauteur, int posX, int posY, float speedX, float speedY){
+		super(longueur, hauteur, posX,posY,speedX,speedY);
 		this.resistance = resistance;
 	}
 	
