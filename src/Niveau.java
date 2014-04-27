@@ -33,7 +33,7 @@ public class Niveau {
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(12,12, 485, 350, 2, -1));
+		 balls.add(new Ball(12,12, 485, 350, 5, -1));
 //		 balls.add(new Ball(12,12, 60, 20, 2, -1));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
@@ -55,7 +55,7 @@ public class Niveau {
 			 }
 		 }
 		 if (a instanceof Ball) {
-			 if (newPosX < 0 || newPosX > 1088) {
+			 if (newPosX < 0 || newPosX > 1075) {
 				 float tmp = a.getSpeedX();
 				 a.setSpeedX(-tmp);
 			 }
@@ -112,6 +112,7 @@ public class Niveau {
 	 public void RaquetteChangeLongueur(int newLongueur){
 		 raquette.setLongueur(newLongueur);
 	 }
+	 
 	 
 	 public void  ListBallsRefresh(Brick br){
 		 ArrayList<Ball> ballsToLow = new ArrayList<Ball>();
