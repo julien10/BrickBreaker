@@ -21,11 +21,13 @@ public class Panel extends JPanel {
 	private Niveau niveau;
 	boolean gaucheEnfoncee = false;
 	boolean droiteEnfoncee = false;
+	boolean pauseEnfoncee ;
 	
 	
 	public Panel(Niveau niveau) {
 		addKeyListener(new ClavierListener());
 		this.niveau = niveau;
+		boolean pauseEnfoncee = false;
 	}
 	
 	@Override
@@ -110,6 +112,12 @@ public class Panel extends JPanel {
 				 droiteEnfoncee = true;
 				 System.out.println("touche droite");
 			 }
+			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
+				 pauseEnfoncee = true;
+			 }
+			 else if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == true){
+				 pauseEnfoncee = false;
+			 }
 		 }
 		 
 		 public void keyReleased(KeyEvent e) {
@@ -121,6 +129,7 @@ public class Panel extends JPanel {
 				 droiteEnfoncee = false;
 				 System.out.println("touche droite relachée");
 			 }
+
 		 }
 		 public void keyTyped(KeyEvent e) {}
 	 }

@@ -27,6 +27,10 @@ public abstract class GameObject {
 		return this.longueur;
 	}
 	
+	public void setLongueur(int longueur){
+		this.longueur = longueur;
+	}
+	
 	public float getPosX(){
 		return this.posX;
 	}

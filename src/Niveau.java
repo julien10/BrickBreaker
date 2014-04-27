@@ -27,9 +27,9 @@ public class Niveau {
 			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
 		 }
 		 for (int i=0; i<25; i++)
-			 briques.add(new BrickCloud(40,20,a*(i+1),90,0,0));
+			 briques.add(new BrickBonusLI(40,20,a*(i+1),90,0,0));
 		 
-		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0);
+		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
@@ -108,6 +108,9 @@ public class Niveau {
 	 
 	 public void RaquettePLusLife(){
 		 raquette.setLives(raquette.getLives()+1);
+	 }
+	 public void RaquetteChangeLongueur(int newLongueur){
+		 raquette.setLongueur(newLongueur);
 	 }
 	 
 	 public void  ListBallsRefresh(Brick br){
