@@ -27,13 +27,16 @@ public class Niveau {
 			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
 		 }
 		 for (int i=0; i<25; i++)
-			 briques.add(new BrickCloud(40,20,a*(i+1),90,0,0));
+			 briques.add(new BrickBonusLI(40,20,a*(i+1),90,0,0));
+		
+//		for (int i=0; i<25; i++)
+//			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
 		 
-		 raquette = new Raquette(150,10, 1, 475, 600, 0, 0);
+		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(12,12, 485, 350, 2, -1));
+		 balls.add(new Ball(12,12, 485, 350, 3, -2));
 //		 balls.add(new Ball(12,12, 60, 20, 2, -1));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
@@ -55,7 +58,7 @@ public class Niveau {
 			 }
 		 }
 		 if (a instanceof Ball) {
-			 if (newPosX < 0 || newPosX > 1088) {
+			 if (newPosX < 0 || newPosX > 1075) {
 				 float tmp = a.getSpeedX();
 				 a.setSpeedX(-tmp);
 			 }
@@ -109,6 +112,10 @@ public class Niveau {
 	 public void RaquettePLusLife(){
 		 raquette.setLives(raquette.getLives()+1);
 	 }
+	 public void RaquetteChangeLongueur(int newLongueur){
+		 raquette.setLongueur(newLongueur);
+	 }
+	 
 	 
 	 public void  ListBallsRefresh(Brick br){
 		 ArrayList<Ball> ballsToLow = new ArrayList<Ball>();

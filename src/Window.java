@@ -60,43 +60,52 @@ public class Window extends JFrame {
 	    // Création d'une instance de listener 
 	    // associée au timer
 	    ActionListener action = new ActionListener () {
-	        // Méthode appelée à chaque tic du timer
+	        // Méthode appelée ˆ chaque tic du timer
 	        public void actionPerformed (ActionEvent event) {
-	        	if (panel.gaucheEnfoncee)
-	        		niveau.raquette.setSpeedX(-6);
-	        	else if (panel.droiteEnfoncee)
-	        		niveau.raquette.setSpeedX(6);
-	        	else
-	        		niveau.raquette.setSpeedX(0);
+	        	if (panel.pauseEnfoncee == false){
+	        		if (panel.gaucheEnfoncee)
+	        			niveau.raquette.setSpeedX(-6);
+	        		else if (panel.droiteEnfoncee)
+	        			niveau.raquette.setSpeedX(6);
+	        		else
+	        			niveau.raquette.setSpeedX(0);
 	        	
-	        	niveau.raquette.setPosX(niveau.newPosX(niveau.raquette));
+	        		niveau.raquette.setPosX(niveau.newPosX(niveau.raquette));
 //	        	for(Brick e : niveau.bonus){
 //	        	e.setPosY(niveau.newPosY(e));
 //	        	e.reactionRebond(niveau.raquette, niveau);
 //	        	}
-	        	CheckBonus(niveau.raquette, niveau);
+	        		CheckBonus(niveau.raquette, niveau);
 
-	        	for (Ball b : niveau.balls){
-	        		b.setPosX(niveau.newPosX(b));
-	        		b.setPosY(niveau.newPosY(b));
-	        		checkRebond(b, niveau);
+	        		for (Ball b : niveau.balls){
 
+	        			checkRebond(b, niveau);
+
+	        		}
+	        		niveau.vies = niveau.raquette.getLives();
+	        		niveau.raquette.lifeMinusFinal(niveau);
+	        		affichageScore.setText("<html>Score<br>" + niveau.score + "</html>");
+	        		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");
+	        		panel.repaint();
 	        	}
-	        	niveau.vies = niveau.raquette.getLives();
-	        	niveau.raquette.lifeMinusFinal(niveau);
-	    		affichageScore.setText("<html>Score<br>" + niveau.score + "</html>");
-	    		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");
-	        	panel.repaint();
-	        }
+	        	else{
+	        		affichageScore.setText("<html>PAUSE<br>" + niveau.score + "</html>");
+	        	}
+	        		panel.repaint();
+	        	}
 	    };
 	    return new Timer (30, action);
 	  }
 	
 	public void checkRebond(Ball b,Niveau niveau){
-		boolean stop=false;
+		boolean stop = false;
 		for(int num=0; stop==false && num < niveau.briques.size() ; num++){
-			niveau.briques.get(num).reactionRebond(b, niveau);
-		}		
+			stop = niveau.briques.get(num).reactionRebond(b, niveau);
+		}
+		if (stop == false) {
+			b.setPosX(niveau.newPosX(b));
+			b.setPosY(niveau.newPosY(b));
+		}
 	}
 
 	public void CheckBonus(Brick br, Niveau niveau){
@@ -106,10 +115,9 @@ public class Window extends JFrame {
 		}
 		niveau.ListBonusRefresh(br);
 		
-		
+
 	}
 
-	
 	// ANCIENNE METHODE (NON FONCTIONNELLE)
 /*
 	public void checkRebond(Ball b) {

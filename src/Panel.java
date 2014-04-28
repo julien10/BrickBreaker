@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 //import Niveau.ClavierListener;
@@ -21,11 +19,13 @@ public class Panel extends JPanel {
 	private Niveau niveau;
 	boolean gaucheEnfoncee = false;
 	boolean droiteEnfoncee = false;
+	boolean pauseEnfoncee ;
 	
 	
 	public Panel(Niveau niveau) {
 		addKeyListener(new ClavierListener());
 		this.niveau = niveau;
+		boolean pauseEnfoncee = false;
 	}
 	
 	@Override
@@ -35,15 +35,19 @@ public class Panel extends JPanel {
 		Image brick1;
 		Image brick2;
 		Image brick3;
-		Image bonus;
+		Image bonusMB;
 		Image brick4;
+		Image bonusArgent;
+		Image bonusLI;
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			brick1 = ImageIO.read(new File("briquerouge1.png"));
 			brick2 = ImageIO.read(new File("briquerouge2.png"));
 			brick3 = ImageIO.read(new File("briquerouge3.png"));
-			bonus = ImageIO.read(new File("bonus.png"));
+			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
+			bonusArgent = ImageIO.read(new File("argent.png"));
+			bonusLI = ImageIO.read(new File("bonusLI.png"));
 			
 			for(GameObject o : niveau.balls) {
 				int x2 = (int) o.getPosX();
@@ -77,8 +81,12 @@ public class Panel extends JPanel {
 			for(Brick o : niveau.bonus) {
 				int px = (int)(o.getPosX());
 				int py = (int)(o.getPosY());
-//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-				g.drawImage(bonus,px,py,null);
+				if (o instanceof BonusMB)
+					g.drawImage(bonusMB,px,py,null);
+				if (o instanceof BonusArgent)
+					g.drawImage(bonusArgent,px,py,null);
+				if (o instanceof BonusLI)
+					g.drawImage(bonusLI,px,py,null);
 			}
 			
 		} catch (IOException e) {
@@ -110,6 +118,12 @@ public class Panel extends JPanel {
 				 droiteEnfoncee = true;
 				 System.out.println("touche droite");
 			 }
+			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
+				 pauseEnfoncee = true;
+			 }
+			 else if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == true){
+				 pauseEnfoncee = false;
+			 }
 		 }
 		 
 		 public void keyReleased(KeyEvent e) {
@@ -121,6 +135,7 @@ public class Panel extends JPanel {
 				 droiteEnfoncee = false;
 				 System.out.println("touche droite relachée");
 			 }
+
 		 }
 		 public void keyTyped(KeyEvent e) {}
 	 }
