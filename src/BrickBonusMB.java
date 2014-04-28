@@ -8,7 +8,7 @@ public class BrickBonusMB extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
+		if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
 			stop = true;
 			niveau.brickDelete(this);
 			niveau.score = niveau.score + 25;

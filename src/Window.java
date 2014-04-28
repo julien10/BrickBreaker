@@ -78,8 +78,7 @@ public class Window extends JFrame {
 	        		CheckBonus(niveau.raquette, niveau);
 
 	        		for (Ball b : niveau.balls){
-	        			b.setPosX(niveau.newPosX(b));
-	        			b.setPosY(niveau.newPosY(b));
+
 	        			checkRebond(b, niveau);
 
 	        		}
@@ -99,10 +98,14 @@ public class Window extends JFrame {
 	  }
 	
 	public void checkRebond(Ball b,Niveau niveau){
-		boolean stop=false;
+		boolean stop = false;
 		for(int num=0; stop==false && num < niveau.briques.size() ; num++){
-			niveau.briques.get(num).reactionRebond(b, niveau);
-		}		
+			stop = niveau.briques.get(num).reactionRebond(b, niveau);
+		}
+		if (stop == false) {
+			b.setPosX(niveau.newPosX(b));
+			b.setPosY(niveau.newPosY(b));
+		}
 	}
 
 	public void CheckBonus(Brick br, Niveau niveau){
@@ -112,10 +115,9 @@ public class Window extends JFrame {
 		}
 		niveau.ListBonusRefresh(br);
 		
-		
+
 	}
 
-	
 	// ANCIENNE METHODE (NON FONCTIONNELLE)
 /*
 	public void checkRebond(Ball b) {

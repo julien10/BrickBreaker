@@ -55,5 +55,23 @@ public abstract class GameObject {
 	public void setSpeedY(float speedY){
 		this.speedY = speedY;
 	}
+	
+	
+	
+	public float speedTotal(){
+		float speedtotal=(float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
+		return speedtotal;
+		
+	}
+	
+	public float lastPosX() {
+		return getPosX();
+
+	}
+
+	public float lastPosY() {
+		return getPosY();
+
+	}
 		
 }

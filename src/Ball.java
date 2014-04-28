@@ -7,12 +7,7 @@ public class Ball extends GameObject {
 	}
 	
 
-	
-	public float speedTotal(){
-		float speedtotal=(float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
-		return speedtotal;
-		
-	}
+
 	
 	// Renvoie true si la balle est en dessous de posY
 	public boolean ballout(float posy){
