@@ -57,10 +57,10 @@ public class Window extends JFrame {
 	
 	private Timer createTimer ()
 	  {
-	    // CrŽation d'une instance de listener 
-	    // associŽe au timer
+	    // Crï¿½ation d'une instance de listener 
+	    // associï¿½e au timer
 	    ActionListener action = new ActionListener () {
-	        // MŽthode appelŽe ˆ chaque tic du timer
+	        // Mï¿½thode appelï¿½e ï¿½ chaque tic du timer
 	        public void actionPerformed (ActionEvent event) {
 	        	if (panel.pauseEnfoncee == false){
 	        		if (panel.gaucheEnfoncee)
@@ -88,11 +88,11 @@ public class Window extends JFrame {
 	        		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");
 	        		panel.repaint();
 	        	}
-	        	else{
+	        	else {
 	        		affichageScore.setText("<html>PAUSE<br>" + niveau.score + "</html>");
 	        	}
-	        		panel.repaint();
-	        	}
+	        	panel.repaint();
+	        }
 	    };
 	    return new Timer (30, action);
 	  }
