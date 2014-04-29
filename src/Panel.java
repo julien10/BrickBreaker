@@ -23,22 +23,18 @@ public class Panel extends JPanel {
 	boolean droiteEnfoncee = false;
 	boolean pauseEnfoncee ;
 	
+	private Image pokeball;
+	private Image brick1;
+	private Image brick2;
+	private Image brick3;
+	private Image bonus;
+	private Image brick4;
 	
 	public Panel(Niveau niveau) {
 		addKeyListener(new ClavierListener());
 		this.niveau = niveau;
 		boolean pauseEnfoncee = false;
-	}
-	
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Image pokeball;
-		Image brick1;
-		Image brick2;
-		Image brick3;
-		Image bonus;
-		Image brick4;
+		
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			brick1 = ImageIO.read(new File("briquerouge1.png"));
@@ -46,49 +42,54 @@ public class Panel extends JPanel {
 			brick3 = ImageIO.read(new File("briquerouge3.png"));
 			bonus = ImageIO.read(new File("bonus.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
-			
-			for(GameObject o : niveau.balls) {
-				int x2 = (int) o.getPosX();
-				int y2 = (int) o.getPosY();
-//				int diameter = (int) o.getLongueur();
-//				g.fillOval(x2, y2, diameter, diameter);
-				g.drawImage(pokeball,x2,y2,null);
-			}
-			
-			for(GameObject o : niveau.briques) {
-				if (o.getLongueur() == 40) {
-					int px = (int)(o.getPosX());
-					int py = (int)(o.getPosY());
-//					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-					if (o instanceof BrickResistance) {
-						if (((BrickResistance) o).getResistance() == 1)
-							g.drawImage(brick1, px, py, null);
-						else if (((BrickResistance) o).getResistance() == 2)
-							g.drawImage(brick2, px, py, null);
-						else if (((BrickResistance) o).getResistance() == 3)
-							g.drawImage(brick3, px, py, null);
-					}
-					else if (o instanceof BrickUnbreakable)
-						g.drawImage(brick4,px,py,null);
-					else
-						g.drawImage(brick1, px, py, null);
-				}
-			}
-			
-
-			for(Brick o : niveau.bonus) {
-				int px = (int)(o.getPosX());
-				int py = (int)(o.getPosY());
-//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
-				g.drawImage(bonus,px,py,null);
-			}
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(niveau == null) {
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		if(niveau == null)
 			return;
+
+			
+		for(GameObject o : niveau.balls) {
+			int x2 = (int) o.getPosX();
+			int y2 = (int) o.getPosY();
+//				int diameter = (int) o.getLongueur();
+//				g.fillOval(x2, y2, diameter, diameter);
+			g.drawImage(pokeball,x2,y2,null);
+		}
+		
+		for(GameObject o : niveau.briques) {
+			if (o.getLongueur() == 40) {
+				int px = (int)(o.getPosX());
+				int py = (int)(o.getPosY());
+//					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+				if (o instanceof BrickResistance) {
+					if (((BrickResistance) o).getResistance() == 1)
+						g.drawImage(brick1, px, py, null);
+					else if (((BrickResistance) o).getResistance() == 2)
+						g.drawImage(brick2, px, py, null);
+					else if (((BrickResistance) o).getResistance() == 3)
+						g.drawImage(brick3, px, py, null);
+				}
+				else if (o instanceof BrickUnbreakable)
+					g.drawImage(brick4,px,py,null);
+				else
+					g.drawImage(brick1, px, py, null);
+			}
+		}
+		
+
+		for(Brick o : niveau.bonus) {
+			int px = (int)(o.getPosX());
+			int py = (int)(o.getPosY());
+//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+			g.drawImage(bonus,px,py,null);
 		}
 
 		g.setColor(Color.white);
@@ -106,11 +107,9 @@ public class Panel extends JPanel {
 		 public void keyPressed(KeyEvent e) {
 			 if (e.getKeyCode() == 37) {
 				 gaucheEnfoncee = true;
-				 System.out.println("touche gauche");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = true;
-				 System.out.println("touche droite");
 			 }
 			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
 				 pauseEnfoncee = true;
@@ -123,11 +122,9 @@ public class Panel extends JPanel {
 		 public void keyReleased(KeyEvent e) {
 			 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				 gaucheEnfoncee = false;
-				 System.out.println("touche gauche relachée");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = false;
-				 System.out.println("touche droite relachée");
 			 }
 
 		 }
