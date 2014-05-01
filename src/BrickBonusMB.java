@@ -8,16 +8,16 @@ public class BrickBonusMB extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
+		if (isInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur(), b.getHauteur())){
 			stop = true;
 			niveau.brickDelete(this);
 			niveau.score = niveau.score + 25;
-			BonusMB bonusmb = new BonusMB(10,10,getPosX()+getLongueur()/2-5,getPosY(),0,2);
+			BonusMB bonusmb = new BonusMB(32,32,getPosX()+getLongueur()/2-5,getPosY(),0,2);
 			niveau.bonusAdd(bonusmb);
-			if(isRebondVertical(b.getPosX())){
+			if(isRebondVertical(b.getPosX(), b.getLongueur())){
 				b.setSpeedY(-b.getSpeedY());
 			}
-			if(isRebondHorizontal(b.getPosY())){
+			if(isRebondHorizontal(b.getPosY(), b.getHauteur())){
 				b.setSpeedX(-b.getSpeedX());
 			}
 		}

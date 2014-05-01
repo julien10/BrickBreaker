@@ -8,7 +8,7 @@ public class BonusVie extends Bonus {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean ViePlus = false;
-		if (isInsideObjectUpperSide(b.getPosX(), b.getPosY(), b.getLongueur())){
+		if (isInside(b.getPosX(), b.getPosY(), b.getLongueur(), b.getHauteur())){
 			ViePlus = true;
 			niveau.RaquettePLusLife();
 		}

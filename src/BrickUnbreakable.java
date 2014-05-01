@@ -8,16 +8,15 @@ public class BrickUnbreakable extends Brick {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
-		if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
+		if (isInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur(), b.getHauteur())){
 			stop = true;
-			if(isRebondVertical(b.getPosX())){
+			if(isRebondVertical(b.getPosX(), b.getLongueur())){
 				b.setSpeedY(-b.getSpeedY());
 			}
-			if(isRebondHorizontal(b.getPosY())){
+			if(isRebondHorizontal(b.getPosY(), b.getHauteur())){
 				b.setSpeedX(-b.getSpeedX());
 			}
 		}
 		return stop;
 	}
-
 }

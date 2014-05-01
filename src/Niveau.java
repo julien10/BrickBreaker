@@ -26,17 +26,17 @@ public class Niveau {
 		 for (int i=0; i<24; i++) {
 			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
 		 }
-		 for (int i=0; i<25; i++)
-			 briques.add(new BrickBonusLI(40,20,a*(i+1),90,0,0));
+//		 for (int i=0; i<25; i++)
+//			 briques.add(new BrickNormal(40,20,a*(i+1),90,0,0));
 		
-//		for (int i=0; i<25; i++)
-//			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
+		for (int i=0; i<25; i++)
+			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
 		 
-		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0);
+		 raquette = new Raquette(150, 10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(12,12, 485, 350, 3, -2));
+		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 3, -3));
 //		 balls.add(new Ball(12,12, 60, 20, 2, -1));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
@@ -58,7 +58,7 @@ public class Niveau {
 			 }
 		 }
 		 if (a instanceof Ball) {
-			 if (newPosX < 0 || newPosX > 1075) {
+			 if (newPosX < 0 || newPosX > 1088) {
 				 float tmp = a.getSpeedX();
 				 a.setSpeedX(-tmp);
 			 }

@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ public class Window extends JFrame {
 	public JLabel affichageVies;
 	
 	public Window(Niveau niveau) {
+		main.fen.choix.dispose();
 		this.niveau = niveau;
 		this.setTitle("Casse-Briques");
 		this.setSize(1250,700);
@@ -78,7 +80,8 @@ public class Window extends JFrame {
 	        		CheckBonus(niveau.raquette, niveau);
 
 	        		for (Ball b : niveau.balls){
-
+//	        			b.setPosX(niveau.newPosX(b));
+//	        			b.setPosY(niveau.newPosY(b));
 	        			checkRebond(b, niveau);
 
 	        		}
@@ -91,16 +94,18 @@ public class Window extends JFrame {
 	        	else{
 	        		affichageScore.setText("<html>PAUSE<br>" + niveau.score + "</html>");
 	        	}
-	        		panel.repaint();
-	        	}
+	        	panel.repaint();
+	        }
 	    };
 	    return new Timer (30, action);
 	  }
 	
 	public void checkRebond(Ball b,Niveau niveau){
 		boolean stop = false;
-		for(int num=0; stop==false && num < niveau.briques.size() ; num++){
+		int nb = niveau.briques.size();
+		for(int num=0; stop==false && num < niveau.briques.size() && niveau.briques.size() == nb; num++){
 			stop = niveau.briques.get(num).reactionRebond(b, niveau);
+//			niveau.briques.get(num).reactionRebond(b, niveau);
 		}
 		if (stop == false) {
 			b.setPosX(niveau.newPosX(b));
@@ -117,59 +122,4 @@ public class Window extends JFrame {
 		
 
 	}
-
-	// ANCIENNE METHODE (NON FONCTIONNELLE)
-/*
-	public void checkRebond(Ball b) {
-		if (b.getSpeedX() < 0 && b.getSpeedY() < 0) {	// vers le haut gauche
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() > 0 && b.getSpeedY() < 0) {	// vers le haut droit
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() > 0 && b.getSpeedY() > 0) {	// vers le bas droit
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() < 0 && b.getSpeedY() > 0) {	// vers le bas gauche
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-	}
-		
-*/
 }

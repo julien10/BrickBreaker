@@ -7,26 +7,18 @@ public abstract class Brick extends GameObject {
 		super(longueur, hauteur, posX,posY,speedX,speedY);
 
 	}	
+
 	
-	
-	public boolean isBallInside(float x, float y, float radius){	
+	public boolean isInside(float x, float y, int longueur, int hauteur) {
 		boolean inside = false;
-		if (y+radius >= getPosY() && y-radius<=getPosY()+getHauteur()){
-			if (x>=getPosX() && x<=getPosX()+getLongueur()){
-				inside = true;
-			}
-		}
-		if (x+radius>=getPosX() && x-radius<=getPosX()+getLongueur()){
-			if (y >= getPosY() && y<=getPosY()+getHauteur()){
-				inside = true;
-			}
-		}
+		if (y + hauteur > getPosY() && y < getPosY() + getHauteur() && x + longueur > getPosX() && x < getPosX() + getLongueur()) 
+			inside = true;
 		return inside;
 	}
 	
-	public boolean isRebondVertical(float x){
+	public boolean isRebondVertical(float x, int longueur){
 		boolean rebondVertical = false;
-		if(x>= getPosX() && x <= getPosX()+getLongueur() ){
+		if(x + longueur > getPosX() && x < getPosX() + getLongueur() ){
 			rebondVertical = true;
 		}
 		return rebondVertical;
@@ -34,24 +26,14 @@ public abstract class Brick extends GameObject {
 
 
 
-	public boolean isRebondHorizontal(float y){
+	public boolean isRebondHorizontal(float y, int hauteur){
 		boolean rebondHorizontal = false;
-		if(y>= getPosY() && y <= getPosY()+getHauteur() ){
+		if(y + hauteur > getPosY() && y < getPosY() + getHauteur() ){
 			rebondHorizontal = true;
 		}
 		return rebondHorizontal;
 	}
 	
 	public abstract  boolean reactionRebond(GameObject b,Niveau niveau);
-
-	public boolean isInsideObjectUpperSide(float posx, float posy,int  longueur){
-		boolean isInside = false;
-		if (getPosY()+getHauteur()>posy && getPosY()<posy){
-			if(posx<getPosX() && posx+longueur>getPosX()+getLongueur()){
-				isInside = true;
-			}
-		}
-		return isInside;
-	}
 			
 }

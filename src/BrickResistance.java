@@ -21,34 +21,33 @@ public class BrickResistance extends Brick {
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean stop = false;
 		if (getResistance() == 1) {
-			if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
+//			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
+			if (isInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur(), b.getHauteur())){
 				stop = true;
 				niveau.brickDelete(this);
 				niveau.score = niveau.score + 50;
-				if(isRebondVertical(b.getPosX())){
+				if(isRebondVertical(b.getPosX(), b.getLongueur())){
 					b.setSpeedY(-b.getSpeedY());
 				}
-				if(isRebondHorizontal(b.getPosY())){
+				else if(isRebondHorizontal(b.getPosY(), b.getHauteur())){
 					b.setSpeedX(-b.getSpeedX());
 				}
 			}
 		}
 		else {
-			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
+			if (isInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur(), b.getHauteur())){
+//			if (isBallInside(b.getPosX(), b.getPosY(), b.getLongueur())){
 				stop = true;
-				setResistance(getResistance()-1);
+				this.setResistance(this.getResistance()-1);
 				niveau.score = niveau.score + 50*(1 + getResistance());
-				if (isRebondVertical(b.getPosX())) {
+				if (isRebondVertical(b.getPosX(), b.getLongueur())) {
 					b.setSpeedY(-b.getSpeedY());
 				}
-				if (isRebondHorizontal(b.getPosY())) {
+				else if (isRebondHorizontal(b.getPosY(), b.getHauteur())) {
 					b.setSpeedX(-b.getSpeedX());
 				}
 			}
 		}
 		return stop;
 		}
-
-
-
 }

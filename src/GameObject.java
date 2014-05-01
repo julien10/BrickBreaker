@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 
 public abstract class GameObject {
 	private float posX;
@@ -17,7 +15,7 @@ public abstract class GameObject {
 		this.speedX = speedX;
 		this.speedY = speedY;
 	}
-	
+
 	
 	public int getHauteur() {
 		return this.hauteur;
@@ -59,19 +57,16 @@ public abstract class GameObject {
 	
 	
 	public float speedTotal(){
-		float speedtotal=(float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
+		float speedtotal = (float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
 		return speedtotal;
-		
 	}
 	
 	public float lastPosX() {
 		return getPosX();
-
 	}
 
 	public float lastPosY() {
 		return getPosY();
-
 	}
 		
 }

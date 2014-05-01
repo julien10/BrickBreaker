@@ -19,32 +19,20 @@ public class Raquette extends Brick {
 	}
 	
 	
-	public boolean reactionRebond(GameObject b, Niveau niveau){
-		double a = 0.6/(getLongueur()/2-15);
+	public boolean reactionRebond(GameObject o, Niveau niveau){
 		boolean stop = false;
-		double deltaXD=b.getPosX()-getPosX()-getLongueur()/2+15 ;
-		float speedtotal = b.speedTotal();
-		if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
+		if (isInside(niveau.newPosX(o), niveau.newPosY(o), o.getLongueur(), o.getHauteur())){
 			stop = true;
-					System.out.println(("a" + speedtotal));
-//			if(deltaXD >= 0  ){
-//				System.out.println((b.speedTotal()));
-//				System.out.println((speedtotal));
-//				b.setSpeedX((float)(a*deltaXD)*speedtotal);
-//				b.setSpeedY((float)(1-a*deltaXD)*speedtotal);
-//			}
-//			else{
-				float posX = b.lastPosX();
-				float posY = b.lastPosY();
-				b.setPosX(posX);
-				b.setPosY(posY);
-				if(isRebondVertical(b.getPosX())){
-					b.setSpeedY(-b.getSpeedY());
-				}
-				if(isRebondHorizontal(b.getPosY())){
-					b.setSpeedX(-b.getSpeedX());
-				}
-//			}
+			o.setPosX(o.lastPosX());
+			o.setPosY(o.lastPosY());
+			if(isRebondVertical(o.getPosX(), o.getLongueur())){
+				o.setSpeedY(-o.getSpeedY());
+				float vx = o.getPosX() + o.getLongueur()/2 - (this.getPosX() + this.getLongueur()/2);
+				o.setSpeedX(vx/12);
+			}
+			if(isRebondHorizontal(o.getPosY(), o.getHauteur())){
+				o.setSpeedX(-o.getSpeedX());
+			}
 		}
 		return stop;
 	}
@@ -69,8 +57,8 @@ public class Raquette extends Brick {
 			niveau.raquette.lifeMinusNormal(niveau.balls.get(0), niveau.raquette.getPosY(), niveau);
 		}
 		else{
-			niveau.ListBallsRefresh(niveau.raquette);
-					
+			niveau.ListBallsRefresh(niveau.raquette);		
 		}
 	}
+
 }

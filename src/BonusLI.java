@@ -10,7 +10,7 @@ public class BonusLI extends Bonus {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean newlongueur = false;
-		if (isInsideObjectUpperSide(b.getPosX(), b.getPosY(), b.getLongueur())){
+		if (isInside(b.getPosX(), b.getPosY(), b.getLongueur(), b.getHauteur())){
 			newlongueur = true;
 			niveau.RaquetteChangeLongueur(newLongueur);
 		}

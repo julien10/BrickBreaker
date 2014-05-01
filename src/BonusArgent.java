@@ -10,7 +10,7 @@ public class BonusArgent extends Bonus {
 	
 	public boolean reactionRebond(GameObject b,Niveau niveau){
 		boolean cond = false;
-		if (isInsideObjectUpperSide(b.getPosX(), b.getPosY(), b.getLongueur())){
+		if (isInside(b.getPosX(), b.getPosY(), b.getLongueur(), b.getHauteur())){
 			cond = true;
 			niveau.score = niveau.score + argent ;
 		}

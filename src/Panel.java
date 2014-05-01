@@ -32,18 +32,36 @@ public class Panel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Image pokeball;
-		Image brick1;
-		Image brick2;
-		Image brick3;
+		Image brick1 = null;
+		Image brick2 = null;
+		Image brick3 = null;
+//		Image brickb1;
+//		Image brickb2;
+//		Image brickb3;
+//		Image brickv1;
+//		Image brickv2;
+//		Image brickv3;
 		Image bonusMB;
 		Image brick4;
 		Image bonusArgent;
 		Image bonusLI;
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
-			brick1 = ImageIO.read(new File("briquerouge1.png"));
-			brick2 = ImageIO.read(new File("briquerouge2.png"));
-			brick3 = ImageIO.read(new File("briquerouge3.png"));
+			if (main.theme == 2) {
+				brick1 = ImageIO.read(new File("briquerouge1.png"));
+				brick2 = ImageIO.read(new File("briquerouge2.png"));
+				brick3 = ImageIO.read(new File("briquerouge3.png"));
+			}
+			else if (main.theme == 1) {
+				brick1 = ImageIO.read(new File("briqueeau1.png"));
+				brick2 = ImageIO.read(new File("briqueeau2.png"));
+				brick3 = ImageIO.read(new File("briqueeau3.png"));
+			}
+			else if (main.theme == 3) {
+				brick1 = ImageIO.read(new File("briqueplante1.png"));
+				brick2 = ImageIO.read(new File("briqueplante2.png"));
+				brick3 = ImageIO.read(new File("briqueplante3.png"));
+			}
 			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
 			bonusArgent = ImageIO.read(new File("argent.png"));
@@ -52,8 +70,7 @@ public class Panel extends JPanel {
 			for(GameObject o : niveau.balls) {
 				int x2 = (int) o.getPosX();
 				int y2 = (int) o.getPosY();
-//				int diameter = (int) o.getLongueur();
-//				g.fillOval(x2, y2, diameter, diameter);
+
 				g.drawImage(pokeball,x2,y2,null);
 			}
 			
@@ -61,12 +78,14 @@ public class Panel extends JPanel {
 				if (o.getLongueur() == 40) {
 					int px = (int)(o.getPosX());
 					int py = (int)(o.getPosY());
-//					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+
 					if (o instanceof BrickResistance) {
 						if (((BrickResistance) o).getResistance() == 1)
 							g.drawImage(brick1, px, py, null);
+						
 						else if (((BrickResistance) o).getResistance() == 2)
 							g.drawImage(brick2, px, py, null);
+						
 						else if (((BrickResistance) o).getResistance() == 3)
 							g.drawImage(brick3, px, py, null);
 					}
@@ -78,7 +97,7 @@ public class Panel extends JPanel {
 			}
 			
 
-			for(Brick o : niveau.bonus) {
+			for(Bonus o : niveau.bonus) {
 				int px = (int)(o.getPosX());
 				int py = (int)(o.getPosY());
 				if (o instanceof BonusMB)

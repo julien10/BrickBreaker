@@ -18,6 +18,6 @@ public class Ball extends GameObject {
 		
 		return ballOut;
 	}
-	
+
 
 }
