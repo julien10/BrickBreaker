@@ -19,6 +19,7 @@ public class Raquette extends Brick {
 	}
 	
 	
+<<<<<<< HEAD
 	public boolean reactionRebond(GameObject o, Niveau niveau){
 		boolean stop = false;
 		if (isInside(niveau.newPosX(o), niveau.newPosY(o), o.getLongueur(), o.getHauteur())){
@@ -33,6 +34,34 @@ public class Raquette extends Brick {
 			if(isRebondHorizontal(o.getPosY(), o.getHauteur())){
 				o.setSpeedX(-o.getSpeedX());
 			}
+=======
+	public boolean reactionRebond(GameObject b, Niveau niveau){
+		double a = 0.6/(getLongueur()/2-15);
+		boolean stop = false;
+		double deltaXD=b.getPosX()-getPosX()-getLongueur()/2+15 ;
+		float speedtotal = b.speedTotal();
+		if (isBallInside(niveau.newPosX(b), niveau.newPosY(b), b.getLongueur())){
+			stop = true;
+					System.out.println(("a" + speedtotal));
+//			if(deltaXD >= 0  ){
+//				System.out.println((b.speedTotal()));
+//				System.out.println((speedtotal));
+//				b.setSpeedX((float)(a*deltaXD)*speedtotal);
+//				b.setSpeedY((float)(1-a*deltaXD)*speedtotal);
+//			}
+//			else{
+				float posX = b.lastPosX();
+				float posY = b.lastPosY();
+				b.setPosX(posX);
+				b.setPosY(posY);
+				if(isRebondVertical(b.getPosX())){
+					b.setSpeedY(-b.getSpeedY());
+				}
+				if(isRebondHorizontal(b.getPosY())){
+					b.setSpeedX(-b.getSpeedX());
+				}
+//			}
+>>>>>>> FETCH_HEAD
 		}
 		return stop;
 	}

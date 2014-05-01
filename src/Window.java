@@ -59,10 +59,14 @@ public class Window extends JFrame {
 	
 	private Timer createTimer ()
 	  {
-	    // CrŽation d'une instance de listener 
-	    // associŽe au timer
+	    // Crï¿½ation d'une instance de listener 
+	    // associï¿½e au timer
 	    ActionListener action = new ActionListener () {
+<<<<<<< HEAD
 	        // MŽthode appelŽe ö chaque tic du timer
+=======
+	        // Mï¿½thode appelï¿½e ï¿½ chaque tic du timer
+>>>>>>> FETCH_HEAD
 	        public void actionPerformed (ActionEvent event) {
 	        	if (panel.pauseEnfoncee == false){
 	        		if (panel.gaucheEnfoncee)
@@ -80,10 +84,16 @@ public class Window extends JFrame {
 	        		CheckBonus(niveau.raquette, niveau);
 
 	        		for (Ball b : niveau.balls){
+<<<<<<< HEAD
 //	        			b.setPosX(niveau.newPosX(b));
 //	        			b.setPosY(niveau.newPosY(b));
 	        			checkRebond(b, niveau);
 
+=======
+
+	        			checkRebond(b, niveau);
+
+>>>>>>> FETCH_HEAD
 	        		}
 	        		niveau.vies = niveau.raquette.getLives();
 	        		niveau.raquette.lifeMinusFinal(niveau);
@@ -91,7 +101,11 @@ public class Window extends JFrame {
 	        		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");
 	        		panel.repaint();
 	        	}
+<<<<<<< HEAD
 	        	else{
+=======
+	        	else {
+>>>>>>> FETCH_HEAD
 	        		affichageScore.setText("<html>PAUSE<br>" + niveau.score + "</html>");
 	        	}
 	        	panel.repaint();
@@ -102,10 +116,15 @@ public class Window extends JFrame {
 	
 	public void checkRebond(Ball b,Niveau niveau){
 		boolean stop = false;
+<<<<<<< HEAD
 		int nb = niveau.briques.size();
 		for(int num=0; stop==false && num < niveau.briques.size() && niveau.briques.size() == nb; num++){
 			stop = niveau.briques.get(num).reactionRebond(b, niveau);
 //			niveau.briques.get(num).reactionRebond(b, niveau);
+=======
+		for(int num=0; stop==false && num < niveau.briques.size() ; num++){
+			stop = niveau.briques.get(num).reactionRebond(b, niveau);
+>>>>>>> FETCH_HEAD
 		}
 		if (stop == false) {
 			b.setPosX(niveau.newPosX(b));
@@ -120,6 +139,63 @@ public class Window extends JFrame {
 		}
 		niveau.ListBonusRefresh(br);
 		
+<<<<<<< HEAD
 
+=======
+
+	}
+
+	// ANCIENNE METHODE (NON FONCTIONNELLE)
+/*
+	public void checkRebond(Ball b) {
+		if (b.getSpeedX() < 0 && b.getSpeedY() < 0) {	// vers le haut gauche
+			for (GameObject e : niveau.objets) {
+				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
+					b.setSpeedY(-b.getSpeedY());
+					break;
+				}
+				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
+					b.setSpeedX(-b.getSpeedX());
+					break;
+				}
+			}
+		}
+		if (b.getSpeedX() > 0 && b.getSpeedY() < 0) {	// vers le haut droit
+			for (GameObject e : niveau.objets) {
+				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
+					b.setSpeedY(-b.getSpeedY());
+					break;
+				}
+				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
+					b.setSpeedX(-b.getSpeedX());
+					break;
+				}
+			}
+		}
+		if (b.getSpeedX() > 0 && b.getSpeedY() > 0) {	// vers le bas droit
+			for (GameObject e : niveau.objets) {
+				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
+					b.setSpeedY(-b.getSpeedY());
+					break;
+				}
+				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
+					b.setSpeedX(-b.getSpeedX());
+					break;
+				}
+			}
+		}
+		if (b.getSpeedX() < 0 && b.getSpeedY() > 0) {	// vers le bas gauche
+			for (GameObject e : niveau.objets) {
+				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
+					b.setSpeedY(-b.getSpeedY());
+					break;
+				}
+				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
+					b.setSpeedX(-b.getSpeedX());
+					break;
+				}
+			}
+		}
+>>>>>>> FETCH_HEAD
 	}
 }

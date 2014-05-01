@@ -21,11 +21,18 @@ public class Panel extends JPanel {
 	boolean droiteEnfoncee = false;
 	boolean pauseEnfoncee ;
 	
+	private Image pokeball;
+	private Image brick1;
+	private Image brick2;
+	private Image brick3;
+	private Image bonus;
+	private Image brick4;
 	
 	public Panel(Niveau niveau) {
 		addKeyListener(new ClavierListener());
 		this.niveau = niveau;
 		boolean pauseEnfoncee = false;
+<<<<<<< HEAD
 	}
 	
 	@Override
@@ -45,6 +52,9 @@ public class Panel extends JPanel {
 		Image brick4;
 		Image bonusArgent;
 		Image bonusLI;
+=======
+		
+>>>>>>> FETCH_HEAD
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			if (main.theme == 2) {
@@ -64,6 +74,7 @@ public class Panel extends JPanel {
 			}
 			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
+<<<<<<< HEAD
 			bonusArgent = ImageIO.read(new File("argent.png"));
 			bonusLI = ImageIO.read(new File("bonusLI.png"));
 			
@@ -92,11 +103,52 @@ public class Panel extends JPanel {
 					else if (o instanceof BrickUnbreakable)
 						g.drawImage(brick4,px,py,null);
 					else
-						g.drawImage(brick1, px, py, null);
-				}
-			}
-			
+=======
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		if(niveau == null)
+			return;
 
+			
+		for(GameObject o : niveau.balls) {
+			int x2 = (int) o.getPosX();
+			int y2 = (int) o.getPosY();
+//				int diameter = (int) o.getLongueur();
+//				g.fillOval(x2, y2, diameter, diameter);
+			g.drawImage(pokeball,x2,y2,null);
+		}
+		
+		for(GameObject o : niveau.briques) {
+			if (o.getLongueur() == 40) {
+				int px = (int)(o.getPosX());
+				int py = (int)(o.getPosY());
+//					g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+				if (o instanceof BrickResistance) {
+					if (((BrickResistance) o).getResistance() == 1)
+>>>>>>> FETCH_HEAD
+						g.drawImage(brick1, px, py, null);
+					else if (((BrickResistance) o).getResistance() == 2)
+						g.drawImage(brick2, px, py, null);
+					else if (((BrickResistance) o).getResistance() == 3)
+						g.drawImage(brick3, px, py, null);
+				}
+				else if (o instanceof BrickUnbreakable)
+					g.drawImage(brick4,px,py,null);
+				else
+					g.drawImage(brick1, px, py, null);
+			}
+		}
+		
+
+<<<<<<< HEAD
 			for(Bonus o : niveau.bonus) {
 				int px = (int)(o.getPosX());
 				int py = (int)(o.getPosY());
@@ -114,6 +166,13 @@ public class Panel extends JPanel {
 		}
 		if(niveau == null) {
 			return;
+=======
+		for(Brick o : niveau.bonus) {
+			int px = (int)(o.getPosX());
+			int py = (int)(o.getPosY());
+//				g.drawRect(px, py, o.getLongueur(), o.getHauteur());
+			g.drawImage(bonus,px,py,null);
+>>>>>>> FETCH_HEAD
 		}
 
 		g.setColor(Color.white);
@@ -131,11 +190,15 @@ public class Panel extends JPanel {
 		 public void keyPressed(KeyEvent e) {
 			 if (e.getKeyCode() == 37) {
 				 gaucheEnfoncee = true;
-				 System.out.println("touche gauche");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = true;
-				 System.out.println("touche droite");
+			 }
+			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
+				 pauseEnfoncee = true;
+			 }
+			 else if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == true){
+				 pauseEnfoncee = false;
 			 }
 			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
 				 pauseEnfoncee = true;
@@ -148,11 +211,9 @@ public class Panel extends JPanel {
 		 public void keyReleased(KeyEvent e) {
 			 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				 gaucheEnfoncee = false;
-				 System.out.println("touche gauche relachée");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = false;
-				 System.out.println("touche droite relachée");
 			 }
 
 		 }
