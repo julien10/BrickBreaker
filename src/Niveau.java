@@ -29,8 +29,8 @@ public class Niveau {
 	//	 for (int i=0; i<25; i++)
 	//		 briques.add(new BrickBonusLI(40,20,a*(i+1),90,0,0));
 		
-		for (int i=0; i<25; i++)
-			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
+//		for (int i=0; i<25; i++)
+//			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
 		 
 		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
