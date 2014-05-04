@@ -20,14 +20,16 @@ public class Raquette extends Brick {
 	
 	public boolean reactionRebond(GameObject o, Niveau niveau){
 		boolean stop = false;
+		float vtot=(float)Math.sqrt(Math.pow(o.getSpeedX(),2)+Math.pow(o.getSpeedY(),2));
 		if (isInside(niveau.newPosX(o), niveau.newPosY(o), o.getLongueur(), o.getHauteur())){
 			stop = true;
 			o.setPosX(o.lastPosX());
 			o.setPosY(o.lastPosY());
 			if(isRebondVertical(o.getPosX(), o.getLongueur())){
-				o.setSpeedY(-o.getSpeedY());
 				float vx = o.getPosX() + o.getLongueur()/2 - (this.getPosX() + this.getLongueur()/2);
-				o.setSpeedX(vx/12);
+				o.setSpeedX(vx/20);
+				float vy=-(float)Math.sqrt(Math.pow(vtot,2)-Math.pow(o.getSpeedX(),2));
+				o.setSpeedY(vy);
 			}
 			if(isRebondHorizontal(o.getPosY(), o.getHauteur())){
 				o.setSpeedX(-o.getSpeedX());
