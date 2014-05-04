@@ -144,11 +144,9 @@ public class Panel extends JPanel {
 		 public void keyReleased(KeyEvent e) {
 			 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				 gaucheEnfoncee = false;
-				 System.out.println("touche gauche relach�e");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = false;
-				 System.out.println("touche droite relach�e");
 			 }
 
 		 }
