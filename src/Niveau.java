@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.nio.*;
+import java.nio.file.*;
 
 
 public class Niveau {
@@ -16,20 +20,22 @@ public class Niveau {
 	 public Niveau() {
 		 score = 0;
 		 briques = new ArrayList<Brick>();
-		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
-		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
-		 int a = 80;
-		 for (int i=0; i<12; i++) {
-//			 briques.add(new BrickBonusMB(40,20,a*(i+1),50,0,0));
-			 briques.add(new BrickBonusMB(80,40,a*(i+1),50,0,0));
-		 }
-		 int b = 100;
-		 for (int i=0; i<11; i++) {
-//			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
-			 briques.add(new BrickResistance(3,80,40,b*(i+1)-20*i,90,0,0));
-		 }		
-//		for (int i=0; i<25; i++)
-//			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
+		 File file = File("C:\\Users\\el-matador\\Documents\\miguel\\university\\informatique\\workspace\\BrickBreaker\\text.txt");
+		 niveauReader (file.getAbsolutePath());
+//		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
+//		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
+//		 int a = 80;
+//		 for (int i=0; i<12; i++) {
+////			 briques.add(new BrickBonusMB(40,20,a*(i+1),50,0,0));
+//			 briques.add(new BrickBonusMB(80,40,a*(i+1),50,0,0));
+//		 }
+//		 int b = 100;
+//		 for (int i=0; i<11; i++) {
+////			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
+//			 briques.add(new BrickResistance(3,80,40,b*(i+1)-20*i,90,0,0));
+//		 }		
+////		for (int i=0; i<25; i++)
+////			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
 
 		 raquette = new Raquette(150, 10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
@@ -129,5 +135,33 @@ public class Niveau {
 			 }
 		 }
 	 }
+
+	 public void niveauReader (String path) throws IOException{
+	 	Path chemin = Paths.get(path);
+	 			// Lire les octets du fichier
+	 		byte[] contenu = Files.readAllBytes(chemin);
+	 			// Parcourir les octets et afficher les caractères correspondants
+	 		int y = 0;
+	 		int x = 0;
+	 		for (byte b : contenu){
+	 			String chara=Byte.toString(b);
+	 			
+	 			if (chara =="N" ){
+	 				 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
+	 				 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
+	 					 briques.add(new BrickNormal(80,40,x,y,0,0));
+	 				x += 80;
+	 			}
+	 			if (chara == " "){
+	 				x += 80;
+	 			}
+	 			 if (chara == "S"){
+	 				 x=0;
+	 				y += 40; 	 
+	 			 }
+	 			}	
+	 				
+	 			}
+	 				
 	 
 }
