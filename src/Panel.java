@@ -127,11 +127,9 @@ public class Panel extends JPanel {
 		 public void keyPressed(KeyEvent e) {
 			 if (e.getKeyCode() == 37) {
 				 gaucheEnfoncee = true;
-				 System.out.println("touche gauche");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = true;
-				 System.out.println("touche droite");
 			 }
 			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
 				 pauseEnfoncee = true;
@@ -146,11 +144,11 @@ public class Panel extends JPanel {
 		 public void keyReleased(KeyEvent e) {
 			 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				 gaucheEnfoncee = false;
-				 System.out.println("touche gauche relachŽe");
+				 System.out.println("touche gauche relachï¿½e");
 			 }
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = false;
-				 System.out.println("touche droite relachŽe");
+				 System.out.println("touche droite relachï¿½e");
 			 }
 
 		 }
