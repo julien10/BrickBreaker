@@ -20,37 +20,21 @@ public class Niveau {
 		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
 		 int a = 40;
 		 for (int i=0; i<25; i++) {
-			 briques.add(new BrickUnbreakable(40,20,a*(i+1),50,0,0));
+			 briques.add(new BrickBonusMB(40,20,a*(i+1),50,0,0));
 		 }
-		 int b = 60;
-		 for (int i=0; i<24; i++) {
-			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
-		 }
-<<<<<<< HEAD
-//		 for (int i=0; i<25; i++)
-//			 briques.add(new BrickNormal(40,20,a*(i+1),90,0,0));
-=======
-	//	 for (int i=0; i<25; i++)
-	//		 briques.add(new BrickBonusLI(40,20,a*(i+1),90,0,0));
->>>>>>> FETCH_HEAD
-		
-		for (int i=0; i<25; i++)
-			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
-		 
-<<<<<<< HEAD
+//		 int b = 60;
+//		 for (int i=0; i<24; i++) {
+//			 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
+//		 }		
+//		for (int i=0; i<25; i++)
+//			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
+
 		 raquette = new Raquette(150, 10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
 		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 3, -3));
-=======
-		 raquette = new Raquette(150,10, 3, 475, 600, 0, 0);
-		 vies = raquette.getLives();
 		 
-		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(12,12, 485, 350, 5, -1));
->>>>>>> FETCH_HEAD
-//		 balls.add(new Ball(12,12, 60, 20, 2, -1));
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
 //		 objets = new ArrayList<GameObject>();

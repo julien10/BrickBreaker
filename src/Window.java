@@ -3,9 +3,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +22,8 @@ public class Window extends JFrame {
 	public JPanel infos;
 	public JLabel affichageScore;
 	public JLabel affichageVies;
+	public JButton yes;
+	public JButton no;
 	
 	public Window(Niveau niveau) {
 		main.fen.choix.dispose();
@@ -57,17 +61,13 @@ public class Window extends JFrame {
 		timer.start();
 	}
 	
-	private Timer createTimer ()
-	  {
-	    // Crï¿½ation d'une instance de listener 
-	    // associï¿½e au timer
+	private Timer createTimer() {
+	    // CrŽation d'une instance de listener 
+	    // associŽe au timer
 	    ActionListener action = new ActionListener () {
-<<<<<<< HEAD
 	        // MŽthode appelŽe ö chaque tic du timer
-=======
-	        // Mï¿½thode appelï¿½e ï¿½ chaque tic du timer
->>>>>>> FETCH_HEAD
 	        public void actionPerformed (ActionEvent event) {
+//	        	while (niveau.briques.size() > 1) {
 	        	if (panel.pauseEnfoncee == false){
 	        		if (panel.gaucheEnfoncee)
 	        			niveau.raquette.setSpeedX(-6);
@@ -75,25 +75,14 @@ public class Window extends JFrame {
 	        			niveau.raquette.setSpeedX(6);
 	        		else
 	        			niveau.raquette.setSpeedX(0);
+	        		
 	        	
 	        		niveau.raquette.setPosX(niveau.newPosX(niveau.raquette));
-//	        	for(Brick e : niveau.bonus){
-//	        	e.setPosY(niveau.newPosY(e));
-//	        	e.reactionRebond(niveau.raquette, niveau);
-//	        	}
+	        		
 	        		CheckBonus(niveau.raquette, niveau);
 
-	        		for (Ball b : niveau.balls){
-<<<<<<< HEAD
-//	        			b.setPosX(niveau.newPosX(b));
-//	        			b.setPosY(niveau.newPosY(b));
+	        		for (Ball b : niveau.balls) {
 	        			checkRebond(b, niveau);
-
-=======
-
-	        			checkRebond(b, niveau);
-
->>>>>>> FETCH_HEAD
 	        		}
 	        		niveau.vies = niveau.raquette.getLives();
 	        		niveau.raquette.lifeMinusFinal(niveau);
@@ -101,12 +90,25 @@ public class Window extends JFrame {
 	        		affichageVies.setText("<html>Vies restantes :<br>" + niveau.vies + "</html>");
 	        		panel.repaint();
 	        	}
-<<<<<<< HEAD
 	        	else{
-=======
-	        	else {
->>>>>>> FETCH_HEAD
 	        		affichageScore.setText("<html>PAUSE<br>" + niveau.score + "</html>");
+	        	}
+//	        	}
+	        	
+// ************************************************* SI LE JEU EST FINI *************************************************
+	        	if (niveau.briques.size() == 1 || panel.fin) {
+	        		niveau.balls.clear();
+	        		niveau.briques.clear();
+	        		JLabel replay = new JLabel("Voulez-vous rejouer?");
+	        		replay.setHorizontalAlignment(JLabel.CENTER);
+	        		replay.setForeground(Color.white);
+	        		yes = new JButton("Oui");
+	        		no = new JButton("Non");
+	        		yes.addActionListener(this);
+	        		no.addActionListener(this);
+	        		infos.add(replay);
+	        		infos.add(yes);
+	        		infos.add(no);
 	        	}
 	        	panel.repaint();
 	        }
@@ -114,17 +116,20 @@ public class Window extends JFrame {
 	    return new Timer (30, action);
 	  }
 	
+	public void actionPerformed(ActionEvent arg) {
+		if (arg.getSource() == yes) {
+    		new Window(new Niveau());
+    		main.fen.choix.w.dispose();
+		}
+		if (arg.getSource() == no)
+			this.dispose();
+	}
+	
 	public void checkRebond(Ball b,Niveau niveau){
 		boolean stop = false;
-<<<<<<< HEAD
 		int nb = niveau.briques.size();
 		for(int num=0; stop==false && num < niveau.briques.size() && niveau.briques.size() == nb; num++){
 			stop = niveau.briques.get(num).reactionRebond(b, niveau);
-//			niveau.briques.get(num).reactionRebond(b, niveau);
-=======
-		for(int num=0; stop==false && num < niveau.briques.size() ; num++){
-			stop = niveau.briques.get(num).reactionRebond(b, niveau);
->>>>>>> FETCH_HEAD
 		}
 		if (stop == false) {
 			b.setPosX(niveau.newPosX(b));
@@ -139,63 +144,6 @@ public class Window extends JFrame {
 		}
 		niveau.ListBonusRefresh(br);
 		
-<<<<<<< HEAD
 
-=======
-
-	}
-
-	// ANCIENNE METHODE (NON FONCTIONNELLE)
-/*
-	public void checkRebond(Ball b) {
-		if (b.getSpeedX() < 0 && b.getSpeedY() < 0) {	// vers le haut gauche
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() > 0 && b.getSpeedY() < 0) {	// vers le haut droit
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() == e.getPosY() + e.getHauteur() && e.getPosX() <= b.getPosX() && b.getPosX() <= e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() <= b.getPosY() && b.getPosY() <= e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() > 0 && b.getSpeedY() > 0) {	// vers le bas droit
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() + b.getRadius() == e.getPosX() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
-		if (b.getSpeedX() < 0 && b.getSpeedY() > 0) {	// vers le bas gauche
-			for (GameObject e : niveau.objets) {
-				if (b.getPosY() + b.getRadius() == e.getPosY() && e.getPosX() < b.getPosX() && b.getPosX() < e.getPosX() + e.getLongueur()) {
-					b.setSpeedY(-b.getSpeedY());
-					break;
-				}
-				if (b.getPosX() == e.getPosX() + e.getLongueur() && e.getPosY() < b.getPosY() && b.getPosY() < e.getPosY() + e.getHauteur()) {
-					b.setSpeedX(-b.getSpeedX());
-					break;
-				}
-			}
-		}
->>>>>>> FETCH_HEAD
 	}
 }

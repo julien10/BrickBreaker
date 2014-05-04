@@ -57,30 +57,16 @@ public abstract class GameObject {
 	
 	
 	public float speedTotal(){
-<<<<<<< HEAD
 		float speedtotal = (float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
 		return speedtotal;
-=======
-		float speedtotal=(float) Math.sqrt(getSpeedX()*getSpeedX()+getSpeedY()*getSpeedY());
-		return speedtotal;
-		
->>>>>>> FETCH_HEAD
 	}
 	
 	public float lastPosX() {
 		return getPosX();
-<<<<<<< HEAD
-=======
-
->>>>>>> FETCH_HEAD
 	}
 
 	public float lastPosY() {
 		return getPosY();
-<<<<<<< HEAD
-=======
-
->>>>>>> FETCH_HEAD
 	}
 		
 }

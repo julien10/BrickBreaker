@@ -30,6 +30,7 @@ public class ChoixTheme extends JFrame {
 	JButton feu;
 	JLabel planteLabel;
 	JButton plante;
+	Window w;
 	
 	
 	public ChoixTheme() throws IOException {
@@ -95,7 +96,7 @@ public class ChoixTheme extends JFrame {
 					e.printStackTrace();
 				}
             	Niveau niveau = new Niveau();
-            	new Window(niveau);
+            	w = new Window(niveau);
             	
             }
 		});
