@@ -41,7 +41,7 @@ public class Niveau {
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 3, -3));
+		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 0,(float)-4.24)));
 		 
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
@@ -140,7 +140,7 @@ public class Niveau {
 	 	Path chemin = Paths.get(path);
 	 			// Lire les octets du fichier
 	 		byte[] contenu = Files.readAllBytes(chemin);
-	 			// Parcourir les octets et afficher les caractères correspondants
+	 			// Parcourir les octets et afficher les caractï¿½res correspondants
 	 		int y = 0;
 	 		int x = 0;
 	 		for (byte b : contenu){
