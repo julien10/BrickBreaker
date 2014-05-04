@@ -43,22 +43,22 @@ public class Panel extends JPanel {
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			if (main.theme == 2) {
-				brick1 = ImageIO.read(new File("briquerouge1.png"));
-				brick2 = ImageIO.read(new File("briquerouge2.png"));
-				brick3 = ImageIO.read(new File("briquerouge3.png"));
+				brick1 = ImageIO.read(new File("briquerouge1big.png"));
+				brick2 = ImageIO.read(new File("briquerouge2big.png"));
+				brick3 = ImageIO.read(new File("briquerouge3big.png"));
 			}
 			else if (main.theme == 1) {
-				brick1 = ImageIO.read(new File("briqueeau1.png"));
-				brick2 = ImageIO.read(new File("briqueeau2.png"));
-				brick3 = ImageIO.read(new File("briqueeau3.png"));
+				brick1 = ImageIO.read(new File("briqueeau1big.png"));
+				brick2 = ImageIO.read(new File("briqueeau2big.png"));
+				brick3 = ImageIO.read(new File("briqueeau3big.png"));
 			}
 			else if (main.theme == 3) {
-				brick1 = ImageIO.read(new File("briqueplante1.png"));
-				brick2 = ImageIO.read(new File("briqueplante2.png"));
-				brick3 = ImageIO.read(new File("briqueplante3.png"));
+				brick1 = ImageIO.read(new File("briqueplante1big.png"));
+				brick2 = ImageIO.read(new File("briqueplante2big.png"));
+				brick3 = ImageIO.read(new File("briqueplante3big.png"));
 			}
 			bonusMB = ImageIO.read(new File("bonusMB.png"));
-			brick4 = ImageIO.read(new File("briqueunbreakable.png"));
+			brick4 = ImageIO.read(new File("briqueunbreakablebig.png"));
 			bonusArgent = ImageIO.read(new File("argent.png"));
 			bonusLI = ImageIO.read(new File("bonusLI.png"));
 			
@@ -70,7 +70,8 @@ public class Panel extends JPanel {
 			}
 			
 			for(GameObject o : niveau.briques) {
-				if (o.getLongueur() == 40) {
+//				if (o.getLongueur() == 40) {
+				if (o.getLongueur() == 80) {
 					int px = (int)(o.getPosX());
 					int py = (int)(o.getPosY());
 
