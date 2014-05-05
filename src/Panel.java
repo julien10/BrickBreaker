@@ -39,6 +39,7 @@ public class Panel extends JPanel {
 		Image bonusMB;
 		Image brick4;
 		Image brickCloud;
+		Image brickBomb;
 		Image bonusArgent;
 		Image bonusLI;
 		Image bonusVie;
@@ -62,6 +63,7 @@ public class Panel extends JPanel {
 			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakablebig.png"));
 			brickCloud = ImageIO.read(new File("brickCloud.png"));
+			brickBomb = ImageIO.read(new File("brickBomb.png"));
 			bonusArgent = ImageIO.read(new File("argent.png"));
 			bonusLI = ImageIO.read(new File("bonusLI.png"));
 			bonusVie = ImageIO.read(new File("vie.png"));
@@ -93,6 +95,9 @@ public class Panel extends JPanel {
 						g.drawImage(brick4,px,py,null);
 					else if (o instanceof BrickCloud)
 						g.drawImage(brickCloud,px,py,null);
+					else if (o instanceof BrickBomb)
+						g.drawImage(brickBomb,px,py,null);
+					
 					else
 						g.drawImage(brick1, px, py, null);
 				}
