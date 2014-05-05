@@ -38,8 +38,10 @@ public class Panel extends JPanel {
 		Image brick3 = null;
 		Image bonusMB;
 		Image brick4;
+		Image brickCloud;
 		Image bonusArgent;
 		Image bonusLI;
+		Image bonusVie;
 		try {
 			pokeball = ImageIO.read(new File("pokeball.png"));
 			if (main.theme == 2) {
@@ -59,8 +61,10 @@ public class Panel extends JPanel {
 			}
 			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakablebig.png"));
+			brickCloud = ImageIO.read(new File("brickCloud.png"));
 			bonusArgent = ImageIO.read(new File("argent.png"));
 			bonusLI = ImageIO.read(new File("bonusLI.png"));
+			bonusVie = ImageIO.read(new File("vie.png"));
 			
 			for(GameObject o : niveau.balls) {
 				int x2 = (int) o.getPosX();
@@ -87,6 +91,8 @@ public class Panel extends JPanel {
 					}
 					else if (o instanceof BrickUnbreakable)
 						g.drawImage(brick4,px,py,null);
+					else if (o instanceof BrickCloud)
+						g.drawImage(brickCloud,px,py,null);
 					else
 						g.drawImage(brick1, px, py, null);
 				}
@@ -102,6 +108,8 @@ public class Panel extends JPanel {
 					g.drawImage(bonusArgent,px,py,null);
 				if (o instanceof BonusLI)
 					g.drawImage(bonusLI,px,py,null);
+				if (o instanceof BonusVie)
+					g.drawImage(bonusVie,px,py,null);
 			}
 			
 		} catch (IOException e) {
