@@ -12,7 +12,7 @@ public class BrickBonusVie extends Brick {
 			stop = true;
 			niveau.brickDelete(this);
 			niveau.score = niveau.score + 25;
-			niveau.bonusAdd(new BonusVie(10,10,getPosX()+getLongueur()/2-5,getPosY(),0,2));
+			niveau.bonusAdd(new BonusVie(25,28,getPosX()+getLongueur()/2-5,getPosY(),0,2));
 			if(isRebondVertical(b.getPosX(), b.getLongueur())){
 				b.setSpeedY(-b.getSpeedY());
 			}
