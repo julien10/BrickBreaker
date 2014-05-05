@@ -44,8 +44,8 @@ public class Raquette extends Brick {
 				setLives(getLives()-1);
 				b.setPosX(400);
 				b.setPosY(400);
-				b.setSpeedX(3);
-				b.setSpeedY(-1);
+				b.setSpeedX(0);
+				b.setSpeedY((float)-4.24);
 			}
 			else{
 				niveau.balls.remove(b);
