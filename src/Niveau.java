@@ -24,24 +24,19 @@ public class Niveau {
 		 niveauReader (file.getAbsolutePath());
 //		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
 //		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
-//		 int a = 80;
-//		 for (int i=0; i<12; i++) {
-//			 briques.add(new BrickBonusMB(80,40,a*(i+1),50,0,0));
-//		 }
-//		 		 int b = 80;
+		 int a = 80;
 		 for (int i=0; i<12; i++) {
-		//	 briques.add(new BrickResistance(3,40,20,b*(i+1)-20*i,70,0,0));
-			// briques.add(new BrickResistance(3,80,40,b*(i+1)-20*i,90,0,0));
-			 briques.add(new BrickBomb(80,40,b*(i+1),90,0,0));
+			 briques.add(new BrickBonusMB(80,40,a*(i+1),50,0,0));
+			 briques.add(new BrickBomb(80,40,a*(i+1),90,0,0));
 		 }		
-////		for (int i=0; i<25; i++)
+
 ////			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
 
 		 raquette = new Raquette(150, 10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 0,(float)-4.24)));
+		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 0,(float)-4.24));
 		 
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
