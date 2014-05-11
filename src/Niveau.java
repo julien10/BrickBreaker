@@ -1,9 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
-import java.io.IOException;
-import java.nio.*;
-import java.nio.file.*;
 
 
 public class Niveau {
@@ -16,35 +15,41 @@ public class Niveau {
 	 public int dt = 3;
 	 public int score;
 	 public int vies;
+	 public int incassables = 0;
 	 
-	 public Niveau() {
+	 public Niveau(int lvl) {
 		 score = 0;
 		 briques = new ArrayList<Brick>();
-		 File file = File("C:\\Users\\el-matador\\Documents\\miguel\\university\\informatique\\workspace\\BrickBreaker\\text.txt");
-		 niveauReader (file.getAbsolutePath());
-//		 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
-//		 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
-		 int a = 80;
-		 for (int i=0; i<12; i++) {
-			 briques.add(new BrickBonusMB(80,40,a*(i+1),50,0,0));
-			 briques.add(new BrickBomb(80,40,a*(i+1),90,0,0));
-		 }		
-
-////			 briques.add(new BrickBonusArgent(40,20,a*(i+1),90,0,0));
+		 String numero = "";
+		 if (lvl == 1)
+			 numero = "./lvl1.txt";
+		 else if (lvl == 2)
+			 numero = "./lvl2.txt";
+		 else if (lvl == 3)
+			 numero = "./lvl3.txt";
+		 else if (lvl == 4)
+			 numero = "./lvl4.txt";
+		 else if (lvl == 5)
+			 numero = "./lvl5.txt";
+		 try {
+			niveauReader(numero);
+			System.out.println("fichier lu");
+		} catch (IOException e) {
+			System.out.println("Julien le tout puissant");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		 
 
 		 raquette = new Raquette(150, 10, 3, 475, 600, 0, 0);
 		 vies = raquette.getLives();
 		 
 		 balls = new ArrayList<Ball>();
-		 balls.add(new Ball(15,15, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-17, 0,(float)-4.24));
+//		 balls.add(new Ball(25,25, raquette.getPosX() + raquette.getLongueur()/2, raquette.getPosY()-27, 3, -3));
+		 balls.add(new Ball(25,25, raquette.getPosX() + raquette.getLongueur()/2 - 12, raquette.getPosY()-26, 0, 0));
 		 
 		 bonus = new ArrayList<Bonus>();
 		 briques.add(raquette);
-//		 objets = new ArrayList<GameObject>();
-//		 objets.add(raquette);
-//		 for (GameObject e : briques) {
-//			 objets.add(e);
-//		 }
 	 }
 	
 	 public float newPosX(GameObject a) {
@@ -73,12 +78,7 @@ public class Niveau {
 			 a.setSpeedY(-tmp);
 		 }
 		 else if (newPosY > 700) {
-			 if (balls.size() == 1) {
-				 raquette.setLives(raquette.getLives()-1);
-			 	 ListBallsRefresh(raquette);
-			 }
-			 else
-				 ListBallsRefresh(raquette);
+			 ListBallsRefresh(raquette);
 		 }
 		 return newPosY;
 	 }
@@ -112,6 +112,7 @@ public class Niveau {
 	 public void RaquettePLusLife(){
 		 raquette.setLives(raquette.getLives()+1);
 	 }
+	 
 	 public void RaquetteChangeLongueur(int newLongueur){
 		 raquette.setLongueur(newLongueur);
 	 }
@@ -130,33 +131,104 @@ public class Niveau {
 			 }
 		 }
 	 }
-
+	 
 	 public void niveauReader (String path) throws IOException{
-	 	Path chemin = Paths.get(path);
-	 			// Lire les octets du fichier
-	 		byte[] contenu = Files.readAllBytes(chemin);
-	 			// Parcourir les octets et afficher les caract�res correspondants
-	 		int y = 0;
-	 		int x = 0;
-	 		for (byte b : contenu){
-	 			String chara=Byte.toString(b);
-	 			
-	 			if (chara =="N" ){
-	 				 // int longueur, int hauteur, float points, int resistance, int throwedBonus, int posX, int posY, float speedX, float speedY, int bonus
-	 				 // int longueur, int hauteur,  int posX, int posY, float speedX, float speedY,int bonus
-	 					 briques.add(new BrickNormal(80,40,x,y,0,0));
+//	 	Path chemin = Paths.get(path);
+		 			// Lire les octets du fichier
+		BufferedReader yo = new BufferedReader(new FileReader(path));
+		 			// Parcourir les octets et afficher les caractères correspondants
+		 		
+	 	String line="";
+	 	int y = 0;
+		int x = 0;
+ 		while ((line = yo.readLine()) != null) {
+ 			if (line.compareTo("N") == 0){
+	 			if (x < 960) {
+	 				briques.add(new BrickNormal(80,40,x,y,0,0));
 	 				x += 80;
 	 			}
-	 			if (chara == " "){
-	 				x += 80;
-	 			}
-	 			 if (chara == "S"){
-	 				 x=0;
-	 				y += 40; 	 
-	 			 }
-	 			}	
-	 				
-	 			}
-	 				
+	 		}
+ 			else if (line.compareTo("R") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickResistance(3,80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+ 			else if (line.compareTo("C") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickCloud(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+ 			else if (line.compareTo("U") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickUnbreakable(80,40,x,y,0,0));
+ 					x += 80;
+ 					incassables += 1;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("MB") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickBonusMB(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("LI") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickBonusLI(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("V") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickBonusVie(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("A") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickAccelerate(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("BA") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickBonusArgent(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+
+ 			else if (line.compareTo("B") == 0){
+ 				if (x < 960) {
+ 					briques.add(new BrickBomb(80,40,x,y,0,0));
+ 					x += 80;
+ 				}
+	 		}
+	 		else if (line.compareTo("-") == 0){
+				x += 40;
+ 			}
+
+	 		else if (line.compareTo("_") == 0){
+				x += 80;
+ 			}
+	 		else if (line.compareTo("S") == 0){
+	 			x = 0;
+	 			y += 40;
+			}
+	 		else if (line.compareTo("SS") == 0){
+	 			x = 0;
+	 			y += 60;
+			}
+//	 		else {
+//	 			System.out.println(line);
+//	 		}
+		}
+ 		yo.close();
+	}
 	 
 }
