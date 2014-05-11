@@ -11,7 +11,6 @@ public class Raquette extends Brick {
 	public int getLives(){
 		return this.lives;
 	}
-	
 
 	public void setLives(int lives){
 		if (lives >= 0)
@@ -26,8 +25,13 @@ public class Raquette extends Brick {
 			o.setPosX(o.lastPosX());
 			o.setPosY(o.lastPosY());
 			if(isRebondVertical(o.getPosX(), o.getLongueur())){
+				o.setSpeedY(-o.getSpeedY());
 				float vx = o.getPosX() + o.getLongueur()/2 - (this.getPosX() + this.getLongueur()/2);
-				o.setSpeedX(vx/20);
+//				if (vx < vtot)
+//					o.setSpeedX(vx/20);
+//				else
+//					o.setSpeedX((float) (vtot-0.2));
+				o.setSpeedX(vx/28);
 				float vy=-(float)Math.sqrt(Math.pow(vtot,2)-Math.pow(o.getSpeedX(),2));
 				o.setSpeedY(vy);
 			}
@@ -42,8 +46,9 @@ public class Raquette extends Brick {
 		if(b.ballout(posy)){
 			if(getLives() >= 1){
 				setLives(getLives()-1);
-				b.setPosX(400);
-				b.setPosY(400);
+				System.out.println("j'enlève une vie dans lifeminusnormal (classe raquette)");
+				b.setPosX(this.getPosX() + (this.getLongueur()/2) - (b.getLongueur()/2));
+				b.setPosY(this.getPosY() - b.getHauteur());
 				b.setSpeedX(0);
 				b.setSpeedY((float)-4.24);
 			}
