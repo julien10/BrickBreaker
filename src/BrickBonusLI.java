@@ -1,3 +1,5 @@
+import java.util.Random;
+
 
 public class BrickBonusLI extends Brick {
 
@@ -12,9 +14,9 @@ public class BrickBonusLI extends Brick {
 			stop = true;
 			niveau.brickDelete(this);
 			niveau.score = niveau.score + 25;
-			int[] values = { 75 , 150, 200};
+			int[] values = {75, 150, 200};
 			Random random = new Random();
-			int value = values[ random.nextInt(values.length)];
+			int value = values[random.nextInt(values.length)];
 			BonusLI bonusli = new BonusLI(value,50,50,getPosX()+getLongueur()/2-25,getPosY(),0,2);
 			niveau.bonusAdd(bonusli);
 			if(isRebondVertical(b.getPosX(), b.getLongueur())){
