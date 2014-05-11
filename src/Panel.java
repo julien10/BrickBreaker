@@ -9,8 +9,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-//import Niveau.ClavierListener;
-
 
 public class Panel extends JPanel {
 	
@@ -21,12 +19,13 @@ public class Panel extends JPanel {
 	boolean droiteEnfoncee = false;
 	boolean pauseEnfoncee;
 	boolean fin = false;
+	boolean next_level = false;
 	
 	
 	public Panel(Niveau niveau) {
 		addKeyListener(new ClavierListener());
 		this.niveau = niveau;
-		boolean pauseEnfoncee = false;
+		pauseEnfoncee = false;
 	}
 	
 	@Override
@@ -36,37 +35,37 @@ public class Panel extends JPanel {
 		Image brick1 = null;
 		Image brick2 = null;
 		Image brick3 = null;
-		Image bonusMB;
 		Image brick4;
-		Image brickCloud;
-		Image brickBomb;
+		Image briquecloud;
+		Image briquebombe;
 		Image bonusArgent;
+		Image bonusMB;
 		Image bonusLI;
-		Image bonusVie;
+		Image bonusvie;
 		try {
-			pokeball = ImageIO.read(new File("pokeball.png"));
-			if (main.theme == 2) {
-				brick1 = ImageIO.read(new File("briquerouge1big.png"));
-				brick2 = ImageIO.read(new File("briquerouge2big.png"));
-				brick3 = ImageIO.read(new File("briquerouge3big.png"));
-			}
-			else if (main.theme == 1) {
+			pokeball = ImageIO.read(new File("pokeballbig.png"));
+			if (main.theme == 1) {
 				brick1 = ImageIO.read(new File("briqueeau1big.png"));
 				brick2 = ImageIO.read(new File("briqueeau2big.png"));
 				brick3 = ImageIO.read(new File("briqueeau3big.png"));
+			}
+			else if (main.theme == 2) {
+				brick1 = ImageIO.read(new File("briquerouge1big.png"));
+				brick2 = ImageIO.read(new File("briquerouge2big.png"));
+				brick3 = ImageIO.read(new File("briquerouge3big.png"));
 			}
 			else if (main.theme == 3) {
 				brick1 = ImageIO.read(new File("briqueplante1big.png"));
 				brick2 = ImageIO.read(new File("briqueplante2big.png"));
 				brick3 = ImageIO.read(new File("briqueplante3big.png"));
 			}
-			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			brick4 = ImageIO.read(new File("briqueunbreakablebig.png"));
-			brickCloud = ImageIO.read(new File("brickCloud.png"));
-			brickBomb = ImageIO.read(new File("brickBomb.png"));
+			briquecloud = ImageIO.read(new File("cloud.png"));
+			briquebombe = ImageIO.read(new File("briquebombebig.png"));
+			bonusMB = ImageIO.read(new File("bonusMB.png"));
 			bonusArgent = ImageIO.read(new File("argent.png"));
 			bonusLI = ImageIO.read(new File("bonusLI.png"));
-			bonusVie = ImageIO.read(new File("vie.png"));
+			bonusvie = ImageIO.read(new File("bonusvie.png"));
 			
 			for(GameObject o : niveau.balls) {
 				int x2 = (int) o.getPosX();
@@ -76,7 +75,6 @@ public class Panel extends JPanel {
 			}
 			
 			for(GameObject o : niveau.briques) {
-//				if (o.getLongueur() == 40) {
 				if (o.getLongueur() == 80) {
 					int px = (int)(o.getPosX());
 					int py = (int)(o.getPosY());
@@ -93,11 +91,10 @@ public class Panel extends JPanel {
 					}
 					else if (o instanceof BrickUnbreakable)
 						g.drawImage(brick4,px,py,null);
-					else if (o instanceof BrickCloud)
-						g.drawImage(brickCloud,px,py,null);
 					else if (o instanceof BrickBomb)
-						g.drawImage(brickBomb,px,py,null);
-					
+						g.drawImage(briquebombe,px,py,null);
+					else if (o instanceof BrickCloud)
+						g.drawImage(briquecloud,px,py,null);
 					else
 						g.drawImage(brick1, px, py, null);
 				}
@@ -109,12 +106,12 @@ public class Panel extends JPanel {
 				int py = (int)(o.getPosY());
 				if (o instanceof BonusMB)
 					g.drawImage(bonusMB,px,py,null);
-				if (o instanceof BonusArgent)
+				else if (o instanceof BonusArgent)
 					g.drawImage(bonusArgent,px,py,null);
-				if (o instanceof BonusLI)
+				else if (o instanceof BonusLI)
 					g.drawImage(bonusLI,px,py,null);
-				if (o instanceof BonusVie)
-					g.drawImage(bonusVie,px,py,null);
+				else if (o instanceof BonusVie)
+					g.drawImage(bonusvie,px,py,null);
 			}
 			
 		} catch (IOException e) {
@@ -128,7 +125,7 @@ public class Panel extends JPanel {
 		g.setColor(Color.white);
 		
 
-		if (niveau.raquette.getLives() >= 0) {
+		if (niveau.raquette.getLives() >= 0 && niveau.briques.size() > 1) {
 			int x = (int) niveau.raquette.getPosX();
 			int y = (int) niveau.raquette.getPosY();
 			g.fillRoundRect(x, y, niveau.raquette.getLongueur(), niveau.raquette.getHauteur(),15,15);
@@ -144,6 +141,11 @@ public class Panel extends JPanel {
 			 else if (e.getKeyCode() == 39) {
 				 droiteEnfoncee = true;
 			 }
+			 else if (e.getKeyCode() == KeyEvent.VK_UP)
+				 for (Ball b : niveau.balls) {
+					 if (b.getSpeedX() == 0 && b.getSpeedY() == 0)
+						 b.setSpeedY((float) -4.24);
+				 }
 			 if (e.getKeyCode() == KeyEvent.VK_P && pauseEnfoncee == false){
 				 pauseEnfoncee = true;
 			 }
@@ -152,6 +154,8 @@ public class Panel extends JPanel {
 			 }
 			 if (e.getKeyCode() == KeyEvent.VK_F)
 				 fin = true;
+			 if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				 next_level = true;
 		 }
 		 
 		 public void keyReleased(KeyEvent e) {
